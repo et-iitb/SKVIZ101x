@@ -1,0 +1,3170 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=11" />
+		<meta http-equiv="X-UA-Compatible" content="IE=9" >
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+		<title>SKVIZ101x</title>
+
+		<!-- start custom fonts -->
+		<link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Fauna+One">
+		<link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Syncopate:400,700">
+		<link href="https://fonts.googleapis.com/css?family=Domine:400,700&amp;subset=latin-ext" rel="stylesheet">
+		<!-- end custom fonts -->
+		
+		<!-- start needed css style files -->
+		<link type="text/css" rel="stylesheet" href="css/pageflip.css">	
+		<link type="text/css" rel="stylesheet" href="css/pageflip-custom.css">
+		<link type="text/css" rel="stylesheet" href="css/remodal.css">	
+		<link type="text/css" rel="stylesheet" href="css/remodal-default-theme.css">		
+			
+
+		<!-- end needed css style files -->
+
+		<!-- start needed js libraries -->
+		<script type="text/javascript" src="js/jquery-3.0.0.min.js"></script>			
+		<script type="text/javascript" src="js/pageflip5-min.js"></script>
+		<script type="text/javascript" src="js/key.js"></script>
+			<script type="text/javascript" src="js/common.js"></script>
+		
+			<!-- <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script> -->
+			<!-- <script type="text/javascript" src="js/okzoom.min.js"></script> -->
+
+		
+		<!-- end needed js libraries -->
+		<style type="text/css">
+			#inlinePopUp {
+				position: absolute;
+				width: 35%;
+				height: 50%;
+				margin-left: auto;
+				margin-right: auto;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				top: 0;
+				z-index: 100;
+				top: 50%;
+				-ms-transform: translateY(-50%);
+			    -webkit-transform: translateY(-50%);
+			    -moz-transform: translateY(-50%);
+			    -o-transform: translateY(-50%);
+    			transform: translateY(-50%);
+    			background: #fff;  
+				box-shadow: 0px 8px 16px rgba(0,0,0,0.3);  			
+			}	
+
+			#inlinePopUp p {
+				padding: 0 30px 20px 30px;
+				line-height: 25px;
+				font-size: 14px;
+				font-family: 'Domine', serif;
+			}
+
+			#inlinePopUp span.close {
+				right:10px;top: 6px; z-index: 100;
+				position: absolute;
+				cursor: pointer;
+			}	
+
+			.frontPgeBtn {
+				padding: 0 !important;				
+				width: 210px;
+				margin-left: 18%;
+            float: none;
+            text-align: center;
+            margin: 0 auto !important;
+
+			}	
+
+			#inlinePopUp h2 {
+				font-size: 20px;
+				font-weight: bold;
+				margin:16px 0 0 28px;
+				padding: 0;
+			}
+            
+            #My_Score_li{
+                font-size: 16px;
+                color: #408CBD;
+                /*margin-left: 250px;*/
+            }
+			
+			#closePopUp{
+				position: absolute;
+				width: 35%;
+				height: 23%;
+				margin-left: auto;
+				margin-right: auto;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				top: 0;
+				z-index: 100;
+				top: 50%;
+				-ms-transform: translateY(-50%);
+			    -webkit-transform: translateY(-50%);
+			    -moz-transform: translateY(-50%);
+			    -o-transform: translateY(-50%);
+    			transform: translateY(-50%);
+    			background: #fff; 
+				display:none;
+			}
+			#closePopUp .closeContent{
+				padding-top: 37px;
+				float: left;
+				background: #fff;
+				padding-bottom: 20px;
+				width: 100%;
+				box-shadow: 0px 8px 16px rgba(0,0,0,0.3);
+			}	
+			#closePopUp p {
+				padding: 0 30px 20px 30px;
+				line-height: 25px;
+				font-size: 14px;
+				font-family: 'Domine', serif;
+				text-align:center;
+			}
+			.closeGrpBtn{
+				text-align: center;
+			}
+			.closeGrpBtn .closeBtn {
+				padding: 0 !important;
+				width: 84px;
+				float: none;
+				text-align: center;
+				display: inline;
+				background-color: #3486be;
+				border: 1px solid #3486be;
+				font-size: 15px;
+				border-radius: 5px;
+				color: #fff;
+				cursor:pointer;
+			}
+			
+		</style>	
+			<script  type="text/javascript">
+				var MyScore = getCookie('MyScore');			
+				if ( MyScore > 0 ){
+				 	document.getElementById("score").innerHTML=MyScore;
+					score = parseInt(MyScore);
+				}else{
+					score = 0;
+				}
+			
+			$(document).ready(function(){				 			
+				$("#testBtn").click(function(){																								
+				    var inner = $(this).next('.ansshow');
+				    var display = inner.css('display');
+				    inner.css('display', (display === 'none') ? 'block' : 'none');
+					});				
+    		});
+
+			// bookmarking starts here
+			setTimeout(function(){
+					$("#courseIndex li").each(function(){
+						var pageNumber = $(this).attr('pageNumber');
+						var bookmarkedPages = getCookie('bookMarkedPagesCk');
+						//console.log('29 Aug 2018');
+					//console.log(bookmarkedPages.split(","));
+						if(typeof bookmarkedPages !== 'undefined'){
+							var bookMarkPagesArr =  bookmarkedPages.split(",");
+						}else{
+							var bookMarkPagesArr ='';
+						}
+						//console.log(pageNumber);
+						//if (typeof bookmarkedPages !== 'undefined') {$.inArray(
+						if (typeof bookmarkedPages !== 'undefined') {
+							//if(bookmarkedPages.indexOf(parseInt(pageNumber)) > 0 ){
+							console.log("ArrayCheck-"+$.inArray(pageNumber, bookMarkPagesArr));
+							if($.inArray(pageNumber, bookMarkPagesArr) >= 0){
+								$(this).addClass('light_color');
+							}
+						}
+					})	 	
+
+				},3000);
+			
+			function bookmarkThispage(pageNumber, iconSide = 'right'){
+			
+					var bookmarkedPages = getCookie('bookMarkedPagesCk');
+					var isBookMarked = $('#bkActionId_'+pageNumber).attr('bookmarked');
+					
+					if( isBookMarked == 0 ) {
+						if( bookmarkedPages == null ){
+							setCookie( 'bookMarkedPagesCk', pageNumber, 365);
+						} else {
+							bookmarkedPages = bookmarkedPages+','+pageNumber;
+							setCookie('bookMarkedPagesCk', bookmarkedPages, 365);
+						}
+	
+						if(iconSide == 'right'){
+							$('#bkActionId_'+pageNumber).html('<img class="bookmark pull-right" src="images/bookmark.png">');	
+						}else{
+							$('#bkActionId_'+pageNumber).html('<img class="bookmark pull-left" src="images/bookmark.png">');
+						}					
+						$('#bkActionId_'+pageNumber).attr('bookmarked',1);
+						
+					} else {
+						if( iconSide == 'right' ) {
+							$('#bkActionId_'+pageNumber).html('<img class="bookmark pull-right" src="images/bookmark-outline.png">')	
+						} else {
+							$('#bkActionId_'+pageNumber).html('<img class="bookmark pull-left" src="images/bookmark-outline.png">')
+						}
+	
+						$('#bkActionId_'+pageNumber).attr('bookmarked',0);
+						bookmarkedPages = removeValue(bookmarkedPages, pageNumber);
+						setCookie('bookMarkedPagesCk', bookmarkedPages, 365);
+					}
+				
+			}
+
+			function setCookie(name,value,days) {
+				document.cookie = name+'=; Max-Age=-99999999;';
+				var expires = "";
+				if (days) {
+					var date = new Date();
+					date.setTime(date.getTime() + (days*24*60*60*1000));
+					expires = "; expires=" + date.toUTCString();
+				}
+				document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+			}
+			
+			function getCookie(name) {
+				var nameEQ = name + "=";
+				var ca = document.cookie.split(';');
+				for(var i=0;i < ca.length;i++) {
+					var c = ca[i];
+					while (c.charAt(0)==' ') c = c.substring(1,c.length);
+					if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+				}
+				return null;
+			}
+			
+			function eraseCookie(name) {   
+				document.cookie = name+'=; Max-Age=-99999999;';  
+			}
+
+			function removeValue(list, value) {	
+				
+				//list = list.split(',');
+
+				//list.splice(list.indexOf(value), 1);
+				//for( var i = list.length-1; i--;){
+					//if ( list[i] == value) list.splice(i);
+				//}				
+				 //return list.join(',');
+				
+				return list.replace(new RegExp(",?" + value + ",?"), function(match) {
+      				var first_comma = match.charAt(0) === ',',second_comma;
+
+      				if (first_comma &&(second_comma = match.charAt(match.length - 1) === ',' )) {
+        				return ',';
+      				}
+					return('');
+    			}); 
+			}
+			// bookmarking ends here
+			
+			//working goto index script 29 aug 2018
+			function gotoIndex(){
+				window.location.href = '#book/page/6-7';			
+				// window.location.pathname += '#book/page/6-7';
+
+				gotoPage(6);
+            
+				setTimeout(function(){
+					$("#courseIndex li").each(function(){
+						var pageNumber = $(this).attr('pageNumber');
+						var bookmarkedPages = getCookie('bookMarkedPagesCk');
+						var bookMarkPagesArr = bookmarkedPages.split(",");
+						if (typeof bookmarkedPages !== 'undefined') {
+							console.log("ArrayCheck-"+$.inArray(pageNumber, bookMarkPagesArr));
+							if($.inArray(pageNumber, bookMarkPagesArr) >= 0){
+								$(this).addClass('light_color');
+							}
+						}
+					})	 	
+				},3000);
+			}
+
+			/*$(window).hashchange(function () { //detect hash change
+
+				alert('Hello World');
+				var hash = window.location.hash.slice(1); //hash to string (= "myanchor")
+				var newString = hash.split("/").pop();
+				
+				var pageNumbers = newString.split('-');
+				var bookmarkedPages = getCookie('bookMarkedPagesCk');
+				console.log(bookmarkedPages);
+				if(bookmarkedPages !== 'undefined' && bookmarkedPages.indexOf(",") > 1) {
+					var bookMarkedArr =  bookmarkedPages.split(",");
+				} else if (typeof bookmarkedPages !== 'undefined' && bookmarkedPages.indexOf(",")== -1){ 
+					var bookMarkedArr =bookmarkedPages;
+				} else {
+					var bookMarkedArr ='';
+				}
+				
+				console.log(bookMarkedArr);
+				console.log(pageNumbers[0]);
+				console.log(bookMarkedArr.indexOf(pageNumbers[0]));
+				if(bookMarkedArr.indexOf(pageNumbers[0]) > 0 ){
+					$('#bkActionId_'+pageNumbers[0]).html('<img class="bookmark pull-right" src="images/bookmark.png">');
+				}
+
+				if(bookMarkedArr.indexOf(pageNumbers[1]) > 0 ){
+					$('#bkActionId_'+pageNumbers[1]).html('<img class="bookmark pull-left" src="images/bookmark.png">');
+				}
+
+			});*/
+
+			$(window).on('hashchange', function(){ //detect hash change
+
+				console.log('In Hash Change Action');
+				var hash = window.location.hash.slice(1); //hash to string (= "myanchor")
+				var newString = hash.split("/").pop();
+				
+				var pageNumbers = newString.split('-');
+				var bookmarkedPages = getCookie('bookMarkedPagesCk').replace(/^,/, '');;
+				console.log(bookmarkedPages);
+				console.log(bookmarkedPages.indexOf(","));
+				if(bookmarkedPages != 'undefined' && bookmarkedPages.indexOf(",") >= 1) {
+					var bookMarkedArr =  bookmarkedPages.split(",");
+					console.log("1...."+bookMarkedArr);
+				} else if (typeof bookmarkedPages !== 'undefined' && bookmarkedPages.indexOf(",")== -1){ 
+					var bookMarkedArr = bookmarkedPages;
+					console.log("2...."+bookMarkedArr);
+				} else {
+					var bookMarkedArr ='';
+					console.log("3...."+bookMarkedArr);
+				}
+				//console.log(bookMarkedArr);
+				//console.log('bookmark image id - #bkActionId_'+pageNumbers[1]);
+				console.log("test--"+bookMarkedArr[pageNumbers[0]]);
+				if(bookMarkedArr.indexOf(pageNumbers[0]) >= 0){
+					console.log('Change Bookmark Image here - right');
+					$('#bkActionId_'+pageNumbers[0]).html('<img class="bookmark pull-right" src="images/bookmark.png">');
+				}
+
+				if(bookMarkedArr.indexOf(pageNumbers[1]) >= 0){
+					console.log('Change Bookmark Image here - left');
+					$('#bkActionId_'+pageNumbers[1]).html('<img class="bookmark pull-left" src="images/bookmark.png">');
+				}
+
+			}).trigger('hashchange');
+
+							  
+		</script>
+		<!-- start script needed to run pageflip -->
+		<script type="text/javascript">
+			var $pageflip = $('#pageflip'),
+				pageflip = $pageflip.pageflip();
+
+            $(document).ready(function() {
+          $("#pageflip").click(function() {
+            var bookmarkedPages = getCookie('bookMarkedPagesCk');
+            console.log('11Jan');
+            $(".pf-page-container ").each(function(){
+               //console.log($(this).attr('id'));
+               var currentpagenumber = $(this).attr('id').replace("page","");
+               console.log(currentpagenumber+"~~~");
+               if (bookmarkedPages.indexOf(parseInt(currentpagenumber)) >= 0) {
+                  $('#bkActionId_' + currentpagenumber).attr("bookmarked", 1);
+               }
+            });
+            console.log('11Jan');
+            
+         });
+      });
+
+
+			/* MEET PAGEFLIP CUSTOM FUNCTIONS */
+			var animmode = 1, 
+				animbtns = [ "#animateontop", "#animateonvisible" ],
+				loop = false,
+				rot = 0,
+				target,
+				zooming = false,
+				CustomPFEventHandler = {
+					onFlip: function( PN ) 	{ 
+						if( PN==18 ) $("#isflipping").addClass("selected");
+					},
+					onFlipEnd: function( PN ) {
+						if( PN==18 ) $("#isflipping").removeClass("selected");
+					},
+					onTop: function( PN ) {
+						if( PN==21 && animmode==0 ) startLoop();
+						if( PN==18 ) $("#isontop").addClass("selected");
+					},
+					onTopEnd: function( PN ) {
+						if( PN==21 && animmode==0 ) stopLoop();
+						if( PN==18 ) $("#isontop").removeClass("selected");
+					},
+					onLoad: function( PN ) {
+						if( PN==11 ) videoInit();
+						if( PN==18 ) setZoomFlag();
+					},
+					onUnload: function( PN ) {
+						if( PN==21 && animmode==1 ) stopLoop();
+					},
+					onHide: function( PN ) {
+						if( PN==21 && animmode==1 ) stopLoop();
+						if( PN==18 ) $("#isvisible").removeClass("selected");
+					},
+					onShow: function( PN ) {
+						if( PN==21 ) {
+							if( animmode==1 ) startLoop();
+							else setRot();
+							animation( animmode );
+						}
+						if( PN==18 ) $("#isvisible").addClass("selected");
+					},
+					onZoomIn: function( PN ) {
+						zooming = true;
+						setZoomFlag();
+					},
+					onZoomOut: function( PN ) {
+						zooming = false;
+						setZoomFlag();
+					}
+				};
+				
+			gotoPage = function( p ) {
+				pageflip.gotoPage( p, true );
+				
+				setTimeout(function(){
+					var bookmarkedPages = getCookie('bookMarkedPagesCk');
+					console.log("Goto Page :"+p);//here
+					console.log($('#bkActionId_'+p).attr("bookmarked"));
+					if(bookmarkedPages.indexOf(parseInt(p)) >= 0 ){	
+						$('#bkActionId_'+p).attr("bookmarked",1);
+						//$('#bkActionId_'+pageNumber).attr('bookmarked',1);
+					}
+					console.log($('#bkActionId_'+p).attr("bookmarked"));	 	
+
+				},2000);
+				
+			}
+			videoPlay = function() {
+				var myVideo = document.getElementById("thevideo");
+				if (myVideo.paused) myVideo.play(); 
+				else myVideo.pause(); 
+			}
+			videoInit = function() {
+				//var myVideo = document.getElementById("thevideo");
+			}
+			selectFeature = function( f ) {
+				$(".features").addClass("off");
+				$("#feature"+f).removeClass("off");
+				$("#featurelist ul li").removeClass("selected");
+				$("#option"+f).addClass("selected");
+			}
+			animation = function( t ) {
+				animmode = t;
+				$(".animationcontrol").removeClass("selected");
+				$(animbtns[t]).addClass("selected");
+			}
+			theLoop = function() {
+				if( loop ) raf2( theLoop );
+				setRot();
+			}
+			setRot = function() {
+				$("#spiral").css( { transform: "rotate("+rot+"deg)" } );
+				rot = ( rot+4 )%360;
+			}
+			startLoop = function() {
+				if( !loop ) {
+					loop = true;
+					theLoop();
+				}
+			}
+			stopLoop = function() {
+				loop = false;
+			}
+			setZoomFlag = function() {
+				if( zooming ) $("#iszooming").addClass("selected");
+				else $("#iszooming").removeClass("selected");
+			}
+			window.raf2 = (function(){
+				return 	window.requestAnimationFrame       ||
+						window.webkitRequestAnimationFrame ||
+						window.mozRequestAnimationFrame    ||
+						function( callback ) {
+						window.setTimeout( callback, 100/6 );
+				};
+			})();
+			pageflip.setPFEventCallBack( CustomPFEventHandler );
+			/* END MEET PAGEFLIP CUSTOM FUNCTIONS */
+
+			
+			/* Initialize & Start Pageflip 5 */
+		
+		</script>
+		
+        
+	</head>
+	<body>
+		<!-- Inline pop up starts here -->
+
+		<div id="inlinePopUp">
+			<div style="background:#fff;padding-bottom: 30px;"><span class="close" title="Close" onClick="CloseWindow();">X</span>
+				<h2>Disclaimer</h2>
+				<p class="text-justify">The information provided within this eBook is for general informational purposes only. While we try to keep the information up-to-date and correct, there are no representations or warranties, express or implied, about the completeness, accuracy, reliability, suitability or availability with respect to the information, products, services, or related graphics contained in this eBook for any purpose. Any use of this information is at your own risk.</p>
+				<div class="button-group frontPgeBtn">    
+     				<button type="button" class="next btn btn03" id="btnAccpt">Accept</button>
+	   				<button type="button" class="btn btn02 close" id="btnCncl">Cancel</button>
+	   			</div>
+			</div>
+		</div>	
+		<!-- Inline pop up ends here -->
+        
+        <!-- Close Popup -->
+        <div id="closePopUp">
+       	 	<div class="closeContent">
+        		<p>Sorry, you have not accepted the disclaimer. <br>Hence you will not be able to browse through the book.</p>
+            	<div class="closeGrpBtn">
+            		<button type="button" class="closeBtn">OK</button>
+            	</div>
+            </div>
+            
+        </div>
+
+        <!-- start imgmodal here -->
+        <style>
+        	#imgmodal {
+			  border-radius: 5px;
+			  cursor: pointer;
+			}
+			#imgmodalid{
+				max-width: 1000px;
+			}
+        	.modalclass {
+  				display: none;
+				text-align: center;
+				position: absolute;
+				z-index: 1;
+				padding-top: 100px;
+				left: 12%;
+				top: 8%;
+				width: 100%;
+				height: 59%;
+				overflow: auto;
+				background-color: rgb(0,0,0);
+				background-color: rgba(0,0,0,0.9);
+				max-width: 76%;
+				right: 12%;
+			}
+			.imgmodalcontent {
+			  margin: auto;
+			  display: block;
+			  width: 80%;
+			  max-width: 700px;
+
+			}
+			.imgclosemodal {
+			  position: absolute;
+			  top: 15px;
+			  right: 35px;
+			  color: #f1f1f1;
+			  font-size: 40px;
+			  font-weight: bold;
+			  transition: 0.3s;
+			  cursor: pointer;
+			}
+        </style>
+        <div id="imgmodal" class="modalclass">
+        	<span class="imgclosemodal" onclick="imgclosemodal()">&times;</span>
+        	<img alt="" class="imgmodalconten" id="imgmodalid">
+        </div>
+        <!-- end imgmodal here -->
+		<!-- start embed pageflip -->
+		
+		<div id="pageflip">
+			<!-- Start Cover Page here-->
+		<div class="outerpage">
+   <img class="img-responsive" src="images/iit_logotop.png" title="IITpawai_Logo">
+</div>
+<!-- End Cover Page here-->
+			<!-- start content setup - embedded for offline safety -->
+      	<!-- Start Cover Page here-->
+			<div class="cover"> <div class="header">
+      <h1>Fundamentals of <br>3D Visualization</h1>
+      <p>Dr. Kapil Kadam</p>
+      <p>Dr. Sameer Sahasrabudhe</p>
+
+
+   </div>
+   <div id="coverheading" class="dintext"></div>
+   <div id="covertitles" class="dintext">
+      <img class="img-responsive" src="images/SKVIZ101x.jpg" title="">
+      <p class="book_code_font">SKVIZ101x</p>
+   </div>
+   <div class="footertext dintext">
+   <div class="pull-left">
+      <img class="img-responsive" src="images/IITBX-Logo4.png" title="IITBX">
+	  </div>
+      <span class="pull-left lftSpc">
+      <p><small>Online course available on:</small></p>
+      <a href="https://iitbombayx.in" target="_blank"><span class="larger">https://www.iitbombayx.in</span></a>
+          </div></div>
+             <!-- End Cover Page here-->
+             <!-- Start Blank Page here-->
+             <!-- Start Page 2 here -->
+             <div class="page">
+               <div class="footertext dintext padding_setting">
+                  <span class="pull-center"><p class="">Page 2</p></span>
+                  <span class="pull-right"><p class="white_font">.</p></span>
+               </div>
+            </div>
+             <!-- End Blank Page here-->
+             <!-- End Page 2 here -->
+             <!-- Start Page 3 here -->
+             <!-- Start Introduction Page here-->
+			<div class="page">
+		   <div id="userguide" class="dintext">
+		      <h2>Fundamentals of 3D Visualization</h2>
+		      <h1>Preface</h1>
+		      <p>Architects, designers, photographers, physicists, astronomers, fashion designers, filmmakers, numerical control programmers, and surgeons are some of the satisfying careers in today's world. But, what do they have in common? Achieving success in all of these requires excellent 3D visualization skills!</p>
+		      <p>One challenge faced by aspirants is lack of guidelines to develop their visualization skills as they move from concepts to application. In this course, participants will become familiar with the different aspects of 3D visualization, particularly spatial intelligence and its application.</p>
+		      <h1>How To Use This Book</h1>
+		                  <p>All the topics can be accessed from the Index page, which is accessible from the link in the lower section. To navigate to the next or previous pages, use the Next or Back arrows. Within each chapter are different Learning Dialogues (LeDs) or recorded lectures. Following each dialogue are practice questions. You can attempt the questions multiple times until you are clear with the concept.</p>
+		   </div>
+		   <div class="footertext dintext padding_setting">
+		   <span class="pull-center"><p class="">Page 3</p></span>
+		       <span class="pull-right"><p class="white_font">.</p></span>
+		   </div>
+		</div>
+			<!-- End Introduction Page here-->
+			<!-- End Page 3 here -->
+             <!-- Start Page 4 here -->
+             <!-- Start About author Page here-->
+             <div class="page">
+               <div id="userguide" class="dintext">
+                     <h2>Fundamentals of 3D Visualization</h2>
+                     <h1>About The Author</h1>
+                     <img src="images/drsameer.jpg" alt="" width="80px" height="80px">
+                     <p>Dr. Sameer Sahasrabudhe</p>
+                     <p>He works as Senior Project Research Scientist, at the Dept. of Computer Science and Engineering, IIT Bombay. He is a researcher in the area of visual communication for eLearning. He is a graduate in fine arts and holds post graduate diplomas in animation film making and distance education. He is a professional animator, and has bagged awards at national and international film festivals.</p>
+                     <p>Website: <a href="https://ssameers.wordpress.com/"> ssameers.wordpress.com</a></p>
+                     <p>Email: <a href="mailto:iamsameerss@gmail.com"> iamsameerss@gmail.com</a></p>
+                     <!-- <p>Dr. Kapil Kadam</p>
+                     
+                     <p>Engineering students face difficulties in learning the mandatory course on Engineering Drawing (ED).</p> -->
+               </div>
+               <div class="footertext dintext padding_setting">
+               <span class="pull-center"><p class="">Page 4</p></span>
+                   <span class="pull-right"><p class="white_font">.</p></span>
+               </div>
+            </div>
+            <!-- End Page 4 here -->
+             <!-- Start Page 5 here -->
+            <div class="page">
+               <div id="userguide" class="dintext">
+                     <h2>Fundamentals of 3D Visualization</h2>
+                     <h1>About The Author</h1>
+                     <img src="images/drkapil.jpg" alt="" width="80px" height="80px">
+                     <p>Dr. Kapil B. Kadam</p>
+                     <p>Kapil is a researcher in the area of Educational Technology, especially development of students’ spatial skills. He completed his PhD in Educational Technology, B.E. and M.Tech in Computer Science & Engg. Currently, he works as a Project Research Scientist, at the Dept. of Computer Science and Engineering, IIT Bombay. He is a Blender enthusiast and has conducted several Blender training workshops for students and teachers in India. These workshops focus on basics of 3D modelling, 3D animation, and 3D visualization using Blender.</p>
+                     <p>Website: <a href="http://www.et.iitb.ac.in/~kapil/"> http://www.et.iitb.ac.in/~kapil/</a></p>
+                     <p>Email: <a href="mailto:kapilkadam@iitb.ac.in"> kapilkadam@iitb.ac.in</a></p>
+                     <!-- <p>Dr. Kapil Kadam</p>
+                     
+                     <p>Engineering students face difficulties in learning the mandatory course on Engineering Drawing (ED).</p> -->
+               </div>
+               <div class="footertext dintext padding_setting">
+               <span class="pull-center"><p class="">Page 5</p></span>
+                   <span class="pull-right"><p class="white_font">.</p></span>
+               </div>
+            </div>
+            <!-- End About author Page here-->
+          	<!-- End Page 5 here -->
+            <!-- Start Page 6 here -->
+		<!-- Start Index Page here-->
+		<div class="page"> 
+<h1 class="indexed-heading">Contents</h1>
+   <div id="tocintro" class="dintext">
+      <div class="row">
+         <div class="col col-50 chapter-col" style="width:174px;">
+            <h3>Chapter 0</h3>
+            <h2 class="clr01">Warm Up Module</h2>
+            <ul id="courseIndex">
+               <!-- <li onclick="gotoPage(9);" pageNumber="9">Welcome</li> -->
+               <li onclick="gotoPage(10);" pageNumber="10">Multiple Intelligence</li>
+               <li onclick="gotoPage(11);" pageNumber="11">Elements of Spatial Intelligence</li>
+               <li>Practice Problems</li>
+               <li onclick="gotoPage(12);" pageNumber="12">1 - Spatial Perception</li>
+               <li onclick="gotoPage(13);" pageNumber="13">2 - Spatial Visualization</li>
+               <li onclick="gotoPage(14);" pageNumber="14">3 - Mental Rotation</li>
+               <li onclick="gotoPage(15);" pageNumber="15">4 - Spatial Relation</li>              
+               <li onclick="gotoPage(16);" pageNumber="16">5 - Spatial Orientation</li>                 
+            </ul>
+         </div>         
+         <div class="col col-50 chapter-col">
+               <h3>Chapter 1</h3>
+               <h2 class="clr01">Introduction to 3D Visualization</h2>
+               <ul id="courseIndex">
+                     <li onclick="gotoPage(19);" pageNumber="19">Introduction to the course</li>
+                     <li onclick="gotoPage(20);" pageNumber="20">Visualizing 2D Views of a 3D Object</li>
+                     <li onclick="gotoPage(21);" pageNumber="21">Visualize Shapes at Right Angle</li>
+                     <li onclick="gotoPage(22);" pageNumber="22">Identifying Hidden Surfaces</li>
+                     <li onclick="gotoPage(23);" pageNumber="23">Constructing a 3D Object from 2D Views</li>
+                  </ul>
+           
+         </div>     
+      </div>
+      
+      <div class="row">
+         <div class="col col-50 chapter-col" style="width:174px;">
+               <h3>Chapter 2</h3>
+            <h2 class="clr01">3D Visualization Using Tool</h2>
+            <ul id="courseIndex">
+                  <li onclick="gotoPage(25);" pageNumber="25">Mental Rotation Skills</li>
+                  <li onclick="gotoPage(26);" pageNumber="26">Blender Installation: Windows</li>
+                  <li onclick="gotoPage(27);" pageNumber="27">Blender Installation: Linux</li>
+                  <li onclick="gotoPage(28);" pageNumber="28">Blender Installation: Mac OS</li>             
+                  <li onclick="gotoPage(29);" pageNumber="29">Blender Interface</li>             
+                  <li onclick="gotoPage(30);" pageNumber="30">Mouse Input</li>             
+                  <li onclick="gotoPage(31);" pageNumber="31">Numpad Preference</li>             
+                  <li onclick="gotoPage(32);" pageNumber="32">Rotations and Multiple Views in Blender</li>             
+                  <li onclick="gotoPage(33);" pageNumber="33">Constructing 3D Objects in Blender</li>             
+                  <li onclick="gotoPage(34);" pageNumber="34">Constructing "Engineering Drawing" Objects in Blender</li>             
+               </ul>
+            
+         </div>         
+         <div class="col col-50 chapter-col">
+               <h3>Chapter 3</h3>
+               <h2 class="clr01">Constructing 3D Objects: Extended</h2>
+               <ul id="courseIndex">
+                     <li onclick="gotoPage(36);" pageNumber="36">Visualizing Using Box Method & Construction in Blender</li>
+                     <li onclick="gotoPage(37);" pageNumber="37">Construction of 3D Object in Blender Using Quad View</li>
+                     <li onclick="gotoPage(38);" pageNumber="38">Construction of 3D Object: Planning</li>
+                     <li onclick="gotoPage(39);" pageNumber="39">Constructing a 3D Object in Blender</li>
+                  </ul>
+         </div>     
+      </div>
+      
+   </div>
+   <div class="footertext dintext">
+   <span class="pull-center"><p class="">Page 6</p></span>
+    <span class="pull-right"><p class="white_font">.</p></span>
+   </div>
+</div>
+<!-- End Index Page here-->
+<!-- End Page 6 here -->
+<!-- Start Page 7 here -->
+<!-- Start Index Page here-->
+			<div class="page"> 
+<h1 class="indexed-heading">Contents</h1>
+   <div id="tocintro" class="dintext">
+   
+      <div class="row">
+         <div class="col col-50 chapter-col">
+            <h3>Chapter 4</h3>
+            <h2 class="clr01">Mini Project</h2>
+            <ul id="courseIndex">
+                  <li onclick="gotoPage(41);" pageNumber="41">Problems</li>
+                  <!-- <li onclick="gotoPage(39);" pageNumber="39">Stage 1: Planning</li>
+                  <li onclick="gotoPage(40);" pageNumber="40">Stage 2: Constructing & Visualizing in Blender</li> -->
+                  <li onclick="gotoPage(42);" pageNumber="42">Problems</li>
+                  <!-- <li onclick="gotoPage(39);" pageNumber="39">Stage 1: Planning</li>
+                  <li onclick="gotoPage(40);" pageNumber="40">Stage 2: Visualizing in Blender</li> -->
+               </ul>
+         </div>           
+      </div>
+   </div>
+   <div class="footertext dintext">
+   <span class="pull-center"><p class="">Page 7</p></span>
+    <span class="pull-right"><p class="white_font">.</p></span>
+   </div>
+</div>
+<!-- End Index Page here-->
+<!-- End Page 7 here -->
+<!-- Start Page 8 here -->
+<!-- Start How to Use This book Page here-->
+			<div class="page">
+            <div class="page-intro">
+               <div id="featurelist page-intro">
+                  
+                  
+               </div>
+               <div id="browsericons">
+                  <!--<img src="images/browser_icons+ie.png" alt="browser_icons+ie" width="386" height="45" />-->
+               </div>   
+               <div class="footertext dintext">
+                  <span class="pull-left"><p class="">&nbsp;</p></span>
+                  <span class="pull-center"><p class="">Page 8</p></span>
+               </div>
+               </div>
+         </div>
+<!-- End How to Use This book Page here-->
+<!-- End Page 8 here -->
+<!-- Start Page 9 here -->
+<!-- Start Chapter 0 Page here-->
+<div class="page">
+      <div class="page-intro">
+         <div id="featurelist page-intro">
+            <h6>Chapter 0</h6>
+           <h2>Warm Up Module </h2>
+           <p class="chapter-intro"><strong>Welcome</strong></p>
+           <p class="chapter-intro">This is a warm-up module. The videos cover concepts on Multiple Intelligence, Elements of Spatial Intelligence, and Practice problems.</p>
+         </div>
+         <div id="browsericons">
+            <!--<img src="images/browser_icons+ie.png" alt="browser_icons+ie" width="386" height="45" />-->
+         </div>   
+         <div class="footertext dintext">
+         <span class="pull-left"><p class="">Warm Up Module</p></span>
+         <span class="pull-center"><p class="">Page 9</p></span>
+         </div>
+         </div>
+      </div>
+<!-- End Page 9 here -->
+<!-- Start Page 10 here -->
+<div class="page">
+   <a href="javascript:bookmarkThispage(10,'right');" id="bkActionId_10" bookmarked="0" ><img class="bookmark pull-right" src="images/bookmark-outline.png"></a>
+    
+      <div class="header">
+         <h2>Multiple Intelligence</h2>
+         
+      </div>
+      <div id="featurelist">
+         <div class="row">
+            <div class="col col-100"><p>In this video we will look at what constitutes intelligence, in particular spatial intelligence and its elements.</p>
+               <iframe class="img-srcl" width="400" height="195" src="https://www.youtube.com/embed/Nf1YBJ8mNns?rel=0" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>            </div>
+           <div class="section">
+            <div class="qus-wrap">
+               <div align="left">
+                  <p><span class="start qus-margin-top"><b>Que.</b></span>Which of the following example depicts the use of
+                     Spatial Intelligence?</p>
+               </div>
+               <div class="clearfix"></div>
+               <div class="pull-left">
+                  <span class="start"><b>Ans.</b></span>
+               </div>
+         
+               <div class="option-right">
+                  <div class="radio">
+                     <label><input name="Q1Answer" type="radio" value="Option-A" id="opt-1-1" />Finding the right words to
+                        express what you mean.</label>
+                  </div>
+                  <div class="radio">
+                     <label><input name="Q1Answer" type="radio" value="Option-A" id="opt-1-2" />Understanding what you feel and
+                        what you want.</label>
+                  </div>
+                  <div class="clearfix"></div>
+               </div>
+               <div class="option-left">
+                  <div class="radio">
+                     <label><input name="Q1Answer" type="radio" value="Option-C" id="opt-1-3" />Visualizing the world in 3D.
+                     </label>
+                  </div>
+         
+                  <div class="radio">
+                     <label><input name="Q1Answer" type="radio" value="Option-D" id="opt-1-4" />Discerning sounds, their tone,
+                        and rhythm.</label>
+                  </div>
+               </div>
+            </div>
+         
+            <div class="clearfix"></div>
+            <div class="button-group">
+               <button type="button" class="btn btn02 pull-center" onclick="javascript:showAnsc0Q1();"
+                  id="submit-Q1">Submit</button>
+               <button type="button" class="btn pull-right btn-start-over" id="startOver-1" style="display:none">Show
+                  Answer</button>
+         
+               <script type="text/javascript">
+
+                  document.getElementById('startOver-1').addEventListener('click', function () {
+                     document.getElementById("ansshow1").innerHTML = "<img src='images/green-right-img.png' class='wrong-ans'><p class='answer-corr scrollpane'><strong>Answer<br></strong> Option 2. \"Visualizing the world in 3D\" example depicts the use of Spatial Intelligence.</p>";
+                     document.getElementById("opt-1-3").checked = true;
+                     document.getElementById("submit-Q1").disabled = true;
+                  });
+
+                  function showAnsc0Q1() {
+                     if (!$('input[name="Q1Answer"]').is(':checked')) {
+                        alert("You have not selected any option !");
+                        return false;
+                     }
+                     else {
+
+                        var value = document.getElementById("opt-1-3").checked;
+                        if (value == true) {
+                           document.getElementById("startOver-1").style.display = "none";
+                           document.getElementById("ansshow1").style.display = "block";
+                           document.getElementById("ansshow1").style.backgroundColor = "#FFFFFF";
+                           document.getElementById("submit-Q1").style.backgroundColor = "#b8b8b8";
+                           document.getElementById("submit-Q1").style.border = "1px solid #b8b8b8";
+
+                           document.getElementById("ansshow1").innerHTML = "<img src='images/green-right-img.png' class='wrong-ans'><p class='scrollpane'><strong>Correct:</strong> Option 2. \"Visualizing the world in 3D\" example depicts the use of Spatial Intelligence. </p>";
+                           score = parseInt(score) + 10;
+                           document.getElementById("score").innerHTML = score;
+                           setCookie('MyScore', score, 365);
+                           document.getElementById("submit-Q1").disabled = true;
+                        }
+                        else {
+                           document.getElementById("ansshow1").style.display = "block";
+                           document.getElementById("ansshow1").style.backgroundColor = "#FFFFFF";
+                           document.getElementById("ansshow1").innerHTML = "<img src='images/red-cross-img.png' class='wrong-ans'><p class='scrollpane'><strong>Incorrect:</strong> Options 1, 3, and 4 depicts the use of  Linguistic Intelligence, Intrapersonal Intelligence, and Musical Intelligence respectively.</p>";
+                           document.getElementById("startOver-1").style.display = "block";
+                           document.getElementById("submit-Q1").style.backgroundColor = "#b8b8b8";
+                           document.getElementById("submit-Q1").style.border = "1px solid #b8b8b8";
+
+                        }
+                     }
+                  }
+
+               </script>
+         
+               <div class="ansshow" id="ansshow1"><img src="" id="right-wrong1"></div>
+         
+            </div>
+         </div>
+      </div>
+      </div>
+         
+      <div id="browsericons">
+         <!--<img src="images/browser_icons+ie.png" alt="browser_icons+ie" width="386" height="45" />-->
+      </div>
+      <div class="footertext dintext">
+        <span class="pull-left"><p class="mrgnLft">Warm Up Module</p></span>
+        <span class="pull-center"><p class="">Page 10</p></span>
+      </div>
+   </div>
+<!-- End Page 10 here -->
+<!-- Start Page 11 here -->
+<div class="page">
+   <a href="javascript:bookmarkThispage(11,'left');" id="bkActionId_11" bookmarked="0" ><img class="bookmark pull-left" src="images/bookmark-outline.png"></a>
+    
+      <div class="header">
+         <h2>Elements of Spatial Intelligence</h2>
+         
+      </div>
+      <div id="featurelist">
+         <div class="row">
+            <div class="col col-100"><p>Next, we explore the concept of spatial perception through some exercises.</p>
+               <iframe class="img-srcl" width="400" height="195" src="https://www.youtube.com/embed/10I3VbvE2Ks?rel=0" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+            </div>
+           <div class="section">  
+   <div class="qus-wrap"> 
+           <div align="left">
+           <p><span class="start qus-margin-top"><b>Que.</b></span>Which of the following is not an element of Spatial Intelligence?</p></div>
+           <div class="clearfix"></div>
+           <div class="pull-left">
+           <span class="start"><b>Ans.</b></span>
+           </div>
+            
+            <div class="option-right">
+            <div class="radio">
+               <label><input name="Q1Answer" type="radio" value="Option-A" id="opt-1-1"/>Spatial Visualization</label>
+           </div>
+           <div class="radio">
+               <label><input name="Q1Answer" type="radio" value="Option-A" id="opt-1-2"/>Mental Rotation</label>
+           </div>
+           <div class="clearfix"></div>
+            </div>
+           <div class="option-left">
+            <div class="radio">
+               <label><input name="Q1Answer" type="radio" value="Option-C" id="opt-1-3"/>Spatial Orientation</label>
+           </div>
+           
+           <div class="radio">
+               <label><input name="Q1Answer" type="radio" value="Option-D" id="opt-1-4"/>Logical Visualization</label>
+           </div>  
+           </div>      
+            </div>
+           
+          <div class="clearfix"></div>
+          <div class="button-group">  
+        <button type="button" class="btn btn02 pull-center" onclick="javascript:showAnsc0Q2();" id="submit-Q2">Submit</button>
+        <button type="button" class="btn pull-right btn-start-over" id="startOver-2" style="display:none">Show Answer</button>
+   
+         <script type="text/javascript">
+        
+              document.getElementById('startOver-2').addEventListener('click', function () {
+               document.getElementById("ansshow2").innerHTML="<img src='images/green-right-img.png' class='wrong-ans'><p class='answer-corr scrollpane'><strong>Answer<br></strong> A logical visualization is not an element of Spatial Intelligence.</p>";
+               document.getElementById("opt-1-4").checked=true;
+                  document.getElementById("submit-Q2").disabled=true;
+                });
+             
+               function showAnsc0Q2() { 
+                   if (!$('input[name="Q1Answer"]').is(':checked')) {
+                      alert("You have not selected any option !");
+                   return false;
+               }
+               else{
+                
+               var value = document.getElementById("opt-1-4").checked;
+                   if(value==true){
+                  document.getElementById("startOver-2").style.display="none";
+                  document.getElementById("ansshow2").style.display="block";
+                       document.getElementById("ansshow2").style.backgroundColor="#FFFFFF";
+                  document.getElementById("submit-Q2").style.backgroundColor="#b8b8b8";
+                  document.getElementById("submit-Q2").style.border="1px solid #b8b8b8";
+                  
+                       document.getElementById("ansshow2").innerHTML="<img src='images/green-right-img.png' class='wrong-ans'><p class='scrollpane'><strong>Correct:</strong> A logical visualization is not an element of Spatial Intelligence.</p>";
+                       score= parseInt(score) + 10;
+                       document.getElementById("score").innerHTML=score;
+                  setCookie('MyScore',score,365);
+                       document.getElementById("submit-Q2").disabled=true;
+                   }
+                   else{
+                  document.getElementById("ansshow2").style.display="block";
+                       document.getElementById("ansshow2").style.backgroundColor="#FFFFFF";
+                       document.getElementById("ansshow2").innerHTML="<img src='images/red-cross-img.png' class='wrong-ans'><p class='scrollpane'><strong>Incorrect:</strong> The five elements of spatial intelligence are - spatial perception, spatial visualization, mental rotation, spatial relation, and spatial orientation.</p>";
+                  document.getElementById("startOver-2").style.display="block";
+                  document.getElementById("submit-Q2").style.backgroundColor="#b8b8b8";
+                  document.getElementById("submit-Q2").style.border="1px solid #b8b8b8";
+                  
+                   }
+               } 
+             }
+             
+         </script>
+      
+      <div class="ansshow" id="ansshow2"><img src="" id="right-wrong2"></div>
+                
+       </div>
+      </div>
+      </div>
+      </div>
+         
+      <div id="browsericons">
+         <!--<img src="images/browser_icons+ie.png" alt="browser_icons+ie" width="386" height="45" />-->
+      </div>
+      <div class="footertext dintext">
+        <span class="pull-left"><p class="mrgnLft">Warm Up Module</p></span>
+        <span class="pull-center"><p class="">Page 11</p></span>
+      </div>
+   </div>
+<!-- End Page 11 here -->
+<!-- Start Page 12 here -->
+<div class="page">
+   <a href="javascript:bookmarkThispage(12,'right');" id="bkActionId_12" bookmarked="0" ><img class="bookmark pull-right" src="images/bookmark-outline.png"></a>
+    
+      <div class="header">
+         <h2>Practice Problems 1 - Spatial Perception</h2>
+      </div>
+      <div id="featurelist">
+         <div class="row">
+            <div class="col col-100">
+              <p>It is the ability to perceive spatial relationships, mainly vertical or horizontal with respect to the orientation of one's body, regardless of the distracting information.</p>
+              <img src="images/NEW_LBD_1.jpg" alt="practice-prblem-Q1" width="386" height="100%" onclick="imgpopup('images/NEW_LBD_1.jpg')" />
+            </div>
+           <div class="section">  
+   <div class="qus-wrap"> 
+           <div align="left">
+           <p><span class="start qus-margin-top"><b>Que.</b></span>Imagine you are sitting in a darkened room. All you can see is a luminous tilted frame, inside which is a movable luminous rod. Alignment of the rod within the frame should be such that the rod is vertical. Which one is the correct solution from the given options of A, B, and C?</p></div>
+           <div class="clearfix"></div>
+           <div class="pull-left">
+           <span class="start"><b>Ans.</b></span>
+           </div>
+            
+            <div class="option-right">
+            <div class="radio">
+               <label><input name="Q1Answer" type="radio" value="Option-A" id="opt1-1-1"/>A</label>
+           </div>
+           <div class="radio">
+               <label><input name="Q1Answer" type="radio" value="Option-B" id="opt1-1-2"/>B</label>
+           </div>
+           <div class="clearfix"></div>
+            </div>
+           <div class="option-left">
+            <div class="radio">
+               <label><input name="Q1Answer" type="radio" value="Option-C" id="opt1-1-3"/>C</label>
+           </div>
+           
+           <!-- <div class="radio">
+               <label><input name="Q1Answer" type="radio" value="Option-D" id="opt-1-4"/>Logical Visualization</label>
+           </div>   -->
+           </div>      
+            </div>
+           
+          <div class="clearfix"></div>
+          <div class="button-group">  
+        <button type="button" class="btn btn02 pull-center" onclick="javascript:showAnsc0Q3();" id="submit-Q3">Submit</button>
+        <button type="button" class="btn pull-right btn-start-over" id="startOver-3" style="display:none">Show Answer</button>
+   
+         <script type="text/javascript">
+        
+              document.getElementById('startOver-3').addEventListener('click', function () {
+               document.getElementById("ansshow3").innerHTML="<img src='images/green-right-img.png' class='wrong-ans'><p class='answer-corr scrollpane'><strong>Answer<br></strong> In answer C, the rod is aligned with the true vertical. True vertical means at a right angle to the horizontal plane.</p>";
+               document.getElementById("opt1-1-3").checked=true;
+                  document.getElementById("submit-Q3").disabled=true;
+                });
+             
+               function showAnsc0Q3() { 
+                   if (!$('input[name="Q1Answer"]').is(':checked')) {
+                      alert("You have not selected any option !");
+                   return false;
+               }
+               else{
+                
+               var value = document.getElementById("opt1-1-3").checked;
+                   if(value==true){
+                  document.getElementById("startOver-3").style.display="none";
+                  document.getElementById("ansshow3").style.display="block";
+                       document.getElementById("ansshow3").style.backgroundColor="#FFFFFF";
+                  document.getElementById("submit-Q3").style.backgroundColor="#b8b8b8";
+                  document.getElementById("submit-Q3").style.border="1px solid #b8b8b8";
+                  
+                       document.getElementById("ansshow3").innerHTML="<img src='images/green-right-img.png' class='wrong-ans'><p class='scrollpane'><strong>Correct:</strong> In answer C, the rod is aligned with the true vertical. True vertical means at a right angle to the horizontal plane.</p>";
+                       score= parseInt(score) + 10;
+                       document.getElementById("score").innerHTML=score;
+                  setCookie('MyScore',score,365);
+                       document.getElementById("submit-Q3").disabled=true;
+                   }
+                   else{
+                  document.getElementById("ansshow3").style.display="block";
+                       document.getElementById("ansshow3").style.backgroundColor="#FFFFFF";
+                       document.getElementById("ansshow3").innerHTML="<img src='images/red-cross-img.png' class='wrong-ans'><p class='scrollpane'><strong>Incorrect:</strong> In answer A, the rod is neither aligned with the frame nor true vertical. True vertical means at a right angle to the horizontal plane. And in answer B, the rod is aligned with the frame and not with the true vertical. True vertical means at a right angle to the horizontal plane.</p>";
+                  document.getElementById("startOver-3").style.display="block";
+                  document.getElementById("submit-Q3").style.backgroundColor="#b8b8b8";
+                  document.getElementById("submit-Q3").style.border="1px solid #b8b8b8";
+                  
+                   }
+               } 
+             }
+             
+         </script>
+      
+      <div class="ansshow" id="ansshow3"><img src="" id="right-wrong3"></div>
+                
+       </div>
+      </div>
+      </div>
+      </div>
+         
+      <div id="browsericons">
+         <!--<img src="images/browser_icons+ie.png" alt="browser_icons+ie" width="386" height="45" />-->
+      </div>
+      <div class="footertext dintext">
+        <span class="pull-left"><p class="mrgnLft">Warm Up Module</p></span>
+        <span class="pull-center"><p class="">Page 12</p></span>
+      </div>
+   </div>
+<!-- End Page 12 here -->
+<!-- Start Page 13 here -->
+<div class="page">
+   <a href="javascript:bookmarkThispage(13,'left');" id="bkActionId_13" bookmarked="0" ><img class="bookmark pull-left" src="images/bookmark-outline.png"></a>
+    
+      <div class="header">
+         <h2>2 - Spatial Visualization</h2>
+      </div>
+      <div id="featurelist">
+         <div class="row">
+            <div class="col col-100 ">
+               <p>It is the ability to visualize a configuration in which there is movement or displacement among the (internal) parts of the configuration.</p>
+               
+               <img id="zoom1" src="images/NEW_LBD_2.jpg" alt="chap0-q2" width="386" height="130px" onclick="imgpopup('images/NEW_LBD_2.jpg')" />
+               
+
+               
+               
+            </div>
+           <div class="section">  
+   <div class="qus-wrap"> 
+           <div align="left">
+           <p><span class="start qus-margin-top"><b>Que.</b></span>Observe the given image and identify the nets that form the pyramid shown on the left?</p></div>
+           <div class="clearfix"></div>
+           <div class="pull-left">
+           <span class="start"><b>Ans.</b></span>
+           </div>
+            
+            <div class="option-right">
+            <div class="radio">
+               <label><input name="Q1Answer" type="radio" value="Option-A" id="opt1-2-1"/>A</label>
+           </div>
+           <div class="radio">
+               <label><input name="Q1Answer" type="radio" value="Option-B" id="opt1-2-2"/>B</label>
+           </div>
+           <div class="clearfix"></div>
+            </div>
+           <div class="option-left">
+            <div class="radio">
+               <label><input name="Q1Answer" type="radio" value="Option-C" id="opt1-2-3"/>C</label>
+           </div>
+           
+           <div class="radio">
+               <label><input name="Q1Answer" type="radio" value="Option-D" id="opt1-2-4"/>D</label>
+           </div>  
+           </div>      
+            </div>
+           
+          <div class="clearfix"></div>
+          <div class="button-group">  
+        <button type="button" class="btn btn02 pull-center" onclick="javascript:showAnsc0Q4();" id="submit-Q4">Submit</button>
+        <button type="button" class="btn pull-right btn-start-over" id="startOver-4" style="display:none">Show Answer</button>
+   
+         <script type="text/javascript">
+        
+              document.getElementById('startOver-4').addEventListener('click', function () {
+               document.getElementById("ansshow4").innerHTML="<img src='images/green-right-img.png' class='wrong-ans'><p class='answer-corr scrollpane'><strong>Answer<br></strong> The net in answer C and answer D when folded forms the pyramid.</p>";
+               document.getElementById("opt1-2-4").checked=true;
+                  document.getElementById("submit-Q4").disabled=true;
+               //  });
+               document.getElementById("opt1-2-4").checked=true;
+                  document.getElementById("submit-Q4").disabled=true;
+                });
+             
+               function showAnsc0Q4() { 
+                   if (!$('input[name="Q1Answer"]').is(':checked')) {
+                      alert("You have not selected any option !");
+                   return false;
+               }
+               else{
+                
+               var value = document.getElementById("opt1-2-3").checked;
+               var valueOne = document.getElementById("opt1-2-4").checked;
+                   if(value==true || valueOne==true){
+                  document.getElementById("startOver-4").style.display="none";
+                  document.getElementById("ansshow4").style.display="block";
+                       document.getElementById("ansshow4").style.backgroundColor="#FFFFFF";
+                  document.getElementById("submit-Q4").style.backgroundColor="#b8b8b8";
+                  document.getElementById("submit-Q4").style.border="1px solid #b8b8b8";
+                  
+                       document.getElementById("ansshow4").innerHTML="<img src='images/green-right-img.png' class='wrong-ans'><p class='scrollpane'><strong>Correct:</strong> The net in answer C and answer D when folded forms the pyramid.</p>";
+                       score= parseInt(score) + 10;
+                       document.getElementById("score").innerHTML=score;
+                  setCookie('MyScore',score,365);
+                       document.getElementById("submit-Q4").disabled=true;
+                   }
+                   else{
+                  document.getElementById("ansshow4").style.display="block";
+                       document.getElementById("ansshow4").style.backgroundColor="#FFFFFF";
+                       document.getElementById("ansshow4").innerHTML="<img src='images/red-cross-img.png' class='wrong-ans'><p class='scrollpane'><strong>Incorrect:</strong>The net in answer A and answer B, when folded, does not form the pyramid. </p>";
+                  document.getElementById("startOver-4").style.display="block";
+                  document.getElementById("submit-Q4").style.backgroundColor="#b8b8b8";
+                  document.getElementById("submit-Q4").style.border="1px solid #b8b8b8";
+                  document.getElementById("submit-Q4").disabled=true;
+                  
+                   }
+               } 
+             }
+             
+         </script>
+      
+      <div class="ansshow" id="ansshow4"><img src="" id="right-wrong4"></div>
+                
+       </div>
+      </div>
+      </div>
+      </div>
+         
+      <div id="browsericons">
+         <!--<img src="images/browser_icons+ie.png" alt="browser_icons+ie" width="386" height="45" />-->
+      </div>
+      <div class="footertext dintext">
+        <span class="pull-left"><p class="mrgnLft">Warm Up Module</p></span>
+        <span class="pull-center"><p class="">Page 13</p></span>
+      </div>
+   </div>
+<!-- End Page 13 here -->
+<!-- Start Page 14 here -->
+<div class="page">
+   <a href="javascript:bookmarkThispage(14,'right');" id="bkActionId_14" bookmarked="0" ><img class="bookmark pull-right" src="images/bookmark-outline.png"></a>
+    
+      <div class="header">
+         <h2>3 - Mental Rotation</h2>
+      </div>
+      <div id="featurelist">
+         <div class="row">
+            <div class="col col-100">
+               <p class="img-intro">It is the ability to rapidly and accurately rotate a 2D or 3D figure in one’s mind. </p>
+               
+               <img id="zoom2" src="images/NEW_LBD_3.jpg" alt="chap0-q3" width="386" height="130px" onclick="imgpopup('images/NEW_LBD_3.jpg')" />
+               
+            </div>
+           <div class="section">  
+   <div class="qus-wrap"> 
+           <div align="left">
+           <p><span class="start qus-margin-top"><b>Que.</b></span>Which two drawings of the four on the right show the same object as the one on the left?</p></div>
+           <div class="clearfix"></div>
+           <div class="pull-left">
+           <span class="start"><b>Ans.</b></span>
+           </div>
+            
+            <div class="option-right">
+            <div class="radio">
+               <label><input name="Q1Answer" type="radio" value="Option-A" id="opt1-3-1"/>A</label>
+           </div>
+           <div class="radio">
+               <label><input name="Q1Answer" type="radio" value="Option-B" id="opt1-3-2"/>B</label>
+           </div>
+           <div class="clearfix"></div>
+            </div>
+           <div class="option-left">
+            <div class="radio">
+               <label><input name="Q1Answer" type="radio" value="Option-C" id="opt1-3-3"/>C</label>
+           </div>
+           
+           <div class="radio">
+               <label><input name="Q1Answer" type="radio" value="Option-D" id="opt1-3-4"/>D</label>
+           </div>  
+           </div>      
+            </div>
+           
+          <div class="clearfix"></div>
+          <div class="button-group">  
+        <button type="button" class="btn btn02 pull-center" onclick="javascript:showAnsc0Q5();" id="submit-Q5">Submit</button>
+        <button type="button" class="btn pull-right btn-start-over" id="startOver-5" style="display:none">Show Answer</button>
+   
+         <script type="text/javascript">
+        
+              document.getElementById('startOver-5').addEventListener('click', function () {
+               document.getElementById("ansshow5").innerHTML="<img src='images/green-right-img.png' class='wrong-ans'><p class='answer-corr scrollpane'><strong>Answer<br></strong> Answer is A and D.</p>";
+               document.getElementById("opt1-3-4").checked=true;
+                  document.getElementById("submit-Q5").disabled=true;
+               document.getElementById("opt1-3-1").checked=true;
+                  document.getElementById("submit-Q5").disabled=true;
+                });
+             
+               function showAnsc0Q5() { 
+                   if (!$('input[name="Q1Answer"]').is(':checked')) {
+                      alert("You have not selected any option !");
+                   return false;
+               }
+               else{
+                
+               var value = document.getElementById("opt1-3-4").checked;
+               var valueOne = document.getElementById("opt1-3-1").checked;
+                   if(value==true || valueOne==true){
+                  document.getElementById("startOver-5").style.display="none";
+                  document.getElementById("ansshow5").style.display="block";
+                       document.getElementById("ansshow5").style.backgroundColor="#FFFFFF";
+                  document.getElementById("submit-Q5").style.backgroundColor="#b8b8b8";
+                  document.getElementById("submit-Q5").style.border="1px solid #b8b8b8";
+                  
+                       document.getElementById("ansshow5").innerHTML="<img src='images/green-right-img.png' class='wrong-ans'><p class='scrollpane'><strong>Correct:</strong> Answer is A and D.</p>";
+                       score= parseInt(score) + 10;
+                       document.getElementById("score").innerHTML=score;
+                  setCookie('MyScore',score,365);
+                       document.getElementById("submit-Q5").disabled=true;
+                   }
+                   else{
+                  document.getElementById("ansshow5").style.display="block";
+                       document.getElementById("ansshow5").style.backgroundColor="#FFFFFF";
+                       document.getElementById("ansshow5").innerHTML="<img src='images/red-cross-img.png' class='wrong-ans'><p class='scrollpane'><strong>Incorrect:</strong> Answer is A and D.</p>";
+                  document.getElementById("startOver-5").style.display="block";
+                  document.getElementById("submit-Q5").style.backgroundColor="#b8b8b8";
+                  document.getElementById("submit-Q5").style.border="1px solid #b8b8b8";
+                  
+                   }
+               } 
+             }
+             
+         </script>
+      
+      <div class="ansshow" id="ansshow5"><img src="" id="right-wrong5"></div>
+                
+       </div>
+      </div>
+      </div>
+      </div>
+         
+      <div id="browsericons">
+         <!--<img src="images/browser_icons+ie.png" alt="browser_icons+ie" width="386" height="45" />-->
+      </div>
+      <div class="footertext dintext">
+        <span class="pull-left"><p class="mrgnLft">Warm Up Module</p></span>
+        <span class="pull-center"><p class="">Page 14</p></span>
+      </div>
+   </div>
+<!-- End Page 14 here -->
+<!-- Start Page 15 here -->
+<div class="page">
+   <a href="javascript:bookmarkThispage(15,'left');" id="bkActionId_15" bookmarked="0" ><img class="bookmark pull-left" src="images/bookmark-outline.png"></a>
+    
+      <div class="header">
+         <h2>4 - Spatial Relation</h2>
+      </div>
+      <div id="featurelist">
+         <div class="row">
+            <div class="col col-100">
+               <p>Spatial relation is the ability to comprehend the spatial configuration of objects or parts of an object and their relation to each other. For example, a person has to recognise the identity of an object that is shown in different positions.</p>
+               
+               <img id="zoom3" src="images/NEW_LBD_4.jpg" alt="chap0-q2" width="386" height="130px" onclick="imgpopup('images/NEW_LBD_4.jpg')" />
+               
+            </div>
+           <div class="section">  
+   <div class="qus-wrap"> 
+           <div align="left">
+           <p><span class="start qus-margin-top"><b>Que.</b></span>The cube shown has a different pattern on each face. Which of the options on the right show the same cube as the one on the left?</p></div>
+           <div class="clearfix"></div>
+           <div class="pull-left">
+           <span class="start"><b>Ans.</b></span>
+           </div>
+            
+            <div class="option-right">
+            <div class="radio">
+               <label><input name="Q1Answer" type="radio" value="Option-A" id="opt-1-1"/>A</label>
+           </div>
+           <div class="radio">
+               <label><input name="Q1Answer" type="radio" value="Option-B" id="opt-1-2"/>B</label>
+           </div>
+           <div class="clearfix"></div>
+            </div>
+           <div class="option-left">
+            <div class="radio">
+               <label><input name="Q1Answer" type="radio" value="Option-C" id="opt-1-3"/>C</label>
+           </div>
+           
+           <div class="radio">
+               <label><input name="Q1Answer" type="radio" value="Option-D" id="opt-1-4"/>D</label>
+           </div>  
+           </div>      
+            </div>
+           
+          <div class="clearfix"></div>
+          <div class="button-group">  
+        <button type="button" class="btn btn02 pull-center" onclick="javascript:showAnsc0Q6();" id="submit-Q6">Submit</button>
+        <button type="button" class="btn pull-right btn-start-over" id="startOver-6" style="display:none">Show Answer</button>
+   
+         <script type="text/javascript">
+        
+              document.getElementById('startOver-6').addEventListener('click', function () {
+               document.getElementById("ansshow6").innerHTML="<img src='images/green-right-img.png' class='wrong-ans'><p class='answer-corr scrollpane'><strong>Answer<br></strong> Try It Yourself.</p>";
+               document.getElementById("opt-1-4").checked=true;
+                  document.getElementById("submit-Q6").disabled=true;
+                });
+             
+               function showAnsc0Q6() { 
+                   if (!$('input[name="Q1Answer"]').is(':checked')) {
+                      alert("You have not selected any option !");
+                   return false;
+               }
+               else{
+                
+               var value = document.getElementById("opt-1-4").checked;
+                   if(value==true){
+                  document.getElementById("startOver-6").style.display="none";
+                  document.getElementById("ansshow6").style.display="block";
+                       document.getElementById("ansshow6").style.backgroundColor="#FFFFFF";
+                  document.getElementById("submit-Q6").style.backgroundColor="#b8b8b8";
+                  document.getElementById("submit-Q6").style.border="1px solid #b8b8b8";
+                  
+                       document.getElementById("ansshow6").innerHTML="<img src='images/green-right-img.png' class='wrong-ans'><p class='scrollpane'><strong>Correct:</strong> Try It Yourself.</p>";
+                       score= parseInt(score) + 10;
+                       document.getElementById("score").innerHTML=score;
+                  setCookie('MyScore',score,365);
+                       document.getElementById("submit-Q6").disabled=true;
+                   }
+                   else{
+                  document.getElementById("ansshow6").style.display="block";
+                       document.getElementById("ansshow6").style.backgroundColor="#FFFFFF";
+                       document.getElementById("ansshow6").innerHTML="<img src='images/red-cross-img.png' class='wrong-ans'><p class='scrollpane'><strong>Incorrect:</strong> Try It Yourself.</p>";
+                  document.getElementById("startOver-6").style.display="block";
+                  document.getElementById("submit-Q6").style.backgroundColor="#b8b8b8";
+                  document.getElementById("submit-Q6").style.border="1px solid #b8b8b8";
+                  
+                   }
+               } 
+             }
+             
+         </script>
+      
+      <div class="ansshow" id="ansshow6"><img src="" id="right-wrong6"></div>
+                
+       </div>
+      </div>
+      </div>
+      </div>
+         
+      <div id="browsericons">
+         <!--<img src="images/browser_icons+ie.png" alt="browser_icons+ie" width="386" height="45" />-->
+      </div>
+      <div class="footertext dintext">
+        <span class="pull-left"><p class="mrgnLft">Warm Up Module</p></span>
+        <span class="pull-center"><p class="">Page 15</p></span>
+      </div>
+   </div>
+<!-- End Page 15 here -->
+<!-- Start Page 16 here -->
+<div class="page">
+   <a href="javascript:bookmarkThispage(16,'right');" id="bkActionId_16" bookmarked="0" ><img class="bookmark pull-right" src="images/bookmark-outline.png"></a>
+    
+      <div class="header">
+         <h2>5 - Spatial Orientation</h2>
+      </div>
+      <div id="featurelist">
+         <div class="row">
+            <div class="col col-100">
+               <p>Spatial orientation is the ability to orient oneself physically and mentally in space. Therefore, the person’s spatial position is necessarily an essential part of the task.</p>
+               <img src="images/Final_LBD_555.jpg" alt="chap0-q2" width="386" height="350px" />
+            </div>
+           <div class="section">  
+      <div class="qus-wrap"> 
+           <div align="left"><p>Question continues on the next page.</p>
+           </div>
+           <div class="clearfix"></div>
+           <div class="pull-left">
+           </div>
+            
+            <div class="option-right">
+            <!-- <div class="radio">
+               <label><input name="C0Q7Answer" type="radio" value="Option-A" id="opt-0-1"/>1-C, 2-B, 3-D and 4-A</label>
+           </div>
+           <div class="radio">
+               <label><input name="C0Q7Answer" type="radio" value="Option-B" id="opt-0-2"/>1-B, 2-C, 3-D and 4-A</label>
+           </div> -->
+           <div class="clearfix"></div>
+            </div>
+           <div class="option-left">
+            <!-- <div class="radio">
+               <label><input name="C0Q7Answer" type="radio" value="Option-C" id="opt-0-3"/>2-B, 4-C, 1-D and 3-A </label>
+           </div>
+           
+           <div class="radio">
+               <label><input name="C0Q7Answer" type="radio" value="Option-D" id="opt-0-4"/>3-B, 1-C, 4-D and 2-A</label>
+           </div>  --> 
+           </div> 
+            </div>
+            <div class="clearfix"></div>
+          <div class="button-group">  
+        <!-- <button type="button" class="btn btn02 pull-center" onclick="javascript:showAnscC0Q7();" id="submit-C0Q7">Submit</button> -->
+        <!-- <button type="button" class="btn pull-right btn-start-over" id="startOver-Q7" style="display:none">Show Answer</button> -->
+   
+         <script type="text/javascript">
+        
+              /*document.getElementById('startOver-Q7').addEventListener('click', function () {
+               document.getElementById("ansshowC0Q7").innerHTML="<img src='images/green-right-img.png' class='wrong-ans'><p class='answer-corr scrollpane'><strong>Answer<br></strong> 1-B, 2-C, 3-D and 4-A.</p>";
+               document.getElementById("opt-0-2").checked=true;
+                  document.getElementById("submit-C0Q7").disabled=true;
+                });
+             
+               function showAnscC0Q7() { 
+                   if (!$('input[name="C0Q7Answer"]').is(':checked')) {
+                      alert("You have not selected any option !");
+                   return false;
+               }
+               else{
+                
+               var value = document.getElementById("opt-0-2").checked;
+                   if(value==true){
+                  document.getElementById("startOver-6").style.display="none";
+                  document.getElementById("ansshowC0Q7").style.display="block";
+                       document.getElementById("ansshowC0Q7").style.backgroundColor="#FFFFFF";
+                  document.getElementById("submit-C0Q7").style.backgroundColor="#b8b8b8";
+                  document.getElementById("submit-C0Q7").style.border="1px solid #b8b8b8";
+                  
+                       document.getElementById("ansshowC0Q7").innerHTML="<img src='images/green-right-img.png' class='wrong-ans'><p class='scrollpane'><strong>Correct:</strong> 1-B, 2-C, 3-D and 4-A.</p>";
+                       score= parseInt(score) + 10;
+                       document.getElementById("score").innerHTML=score;
+                  setCookie('MyScore',score,365);
+                       document.getElementById("submit-C0Q7").disabled=true;
+                   }
+                   else{
+                  document.getElementById("ansshowC0Q7").style.display="block";
+                       document.getElementById("ansshowC0Q7").style.backgroundColor="#FFFFFF";
+                       document.getElementById("ansshowC0Q7").innerHTML="<img src='images/red-cross-img.png' class='wrong-ans'><p class='scrollpane'><strong>Incorrect:</strong> Options A,C and D are incorrect.</p>";
+                  document.getElementById("startOver-Q7").style.display="block";
+                  document.getElementById("submit-C0Q7").style.backgroundColor="#b8b8b8";
+                  document.getElementById("submit-C0Q7").style.border="1px solid #b8b8b8";
+                  
+                   }
+               } 
+             }*/
+             
+         </script>
+      
+      <div class="ansshow" ><img src="" id="right-wrong6"></div>
+                
+       </div>
+         </div>
+      </div>
+      </div>
+         
+      <div id="browsericons">
+         <!--<img src="images/browser_icons+ie.png" alt="browser_icons+ie" width="386" height="45" />-->
+      </div>
+      <div class="footertext dintext">
+        <span class="pull-left"><p class="mrgnLft">Warm Up Module</p></span>
+        <span class="pull-center"><p class="">Page 16</p></span>
+      </div>
+   </div>
+<!-- End Page 16 here -->
+<!-- Start Page 17 here -->
+<div class="page">
+   <a href="javascript:bookmarkThispage(17,'left');" id="bkActionId_17" bookmarked="0" ><img class="bookmark pull-left" src="images/bookmark-outline.png"></a>
+    
+      <div class="header">
+         <h2>5 - Spatial Orientation</h2>
+      </div>
+      <div id="featurelist">
+         <div class="row">
+            <div class="col col-100">
+               <!-- <p>Spatial orientation is the ability to orient oneself physically and mentally in space. Therefore, the person’s spatial position is necessarily an essential part of the task.</p>
+               <img src="images/Final_LBD_555.jpg" alt="chap0-q2" width="386" height="200px" /> -->
+            </div>
+           <div class="section">  
+      <div class="qus-wrap"> 
+           <div align="left">
+           <p><span class="start qus-margin-top"><b>Que.</b></span>Observe the image shown. The four labeled cameras set up at different positions capture pictures from different angles. Match the camera labels with the option to identify the pictures captured. To mark your answer, you need to drag the yellow labels to the respective option.</p>
+			<p>To mark your answer, select the correct pairs of options listed below.</p>
+       </div>
+           <div class="clearfix"></div>
+           <div class="pull-left">
+           <span class="start"><b>Ans.</b></span>
+           </div>
+            
+            <div class="option-right">
+            <div class="radio">
+               <label><input name="C0Q7Answer" type="radio" value="Option-A" id="opt-0-1"/>1-C, 2-B, 3-D and 4-A</label>
+           </div>
+           <div class="radio">
+               <label><input name="C0Q7Answer" type="radio" value="Option-B" id="opt-0-2"/>1-B, 2-C, 3-D and 4-A</label>
+           </div>
+           <div class="clearfix"></div>
+            </div>
+           <div class="option-left">
+            <div class="radio">
+               <label><input name="C0Q7Answer" type="radio" value="Option-C" id="opt-0-3"/>2-B, 4-C, 1-D and 3-A </label>
+           </div>
+           
+           <div class="radio">
+               <label><input name="C0Q7Answer" type="radio" value="Option-D" id="opt-0-4"/>3-B, 1-C, 4-D and 2-A</label>
+           </div>  
+           </div> 
+            </div>
+            <div class="clearfix"></div>
+          <div class="button-group">  
+        <button type="button" class="btn btn02 pull-center" onclick="javascript:showAnscC0Q7();" id="submit-C0Q7">Submit</button>
+        <button type="button" class="btn pull-right btn-start-over" id="startOver-Q7" style="display:none">Show Answer</button>
+   
+         <script type="text/javascript">
+        
+              document.getElementById('startOver-Q7').addEventListener('click', function () {
+               document.getElementById("ansshowC0Q7").innerHTML="<img src='images/green-right-img.png' class='wrong-ans'><p class='answer-corr scrollpane'><strong>Answer<br></strong> 1-B, 2-C, 3-D and 4-A.</p>";
+               document.getElementById("opt-0-2").checked=true;
+                  document.getElementById("submit-C0Q7").disabled=true;
+                });
+             
+               function showAnscC0Q7() { 
+                   if (!$('input[name="C0Q7Answer"]').is(':checked')) {
+                      alert("You have not selected any option !");
+                   return false;
+               }
+               else{
+                
+               var value = document.getElementById("opt-0-2").checked;
+                   if(value==true){
+                  document.getElementById("startOver-6").style.display="none";
+                  document.getElementById("ansshowC0Q7").style.display="block";
+                       document.getElementById("ansshowC0Q7").style.backgroundColor="#FFFFFF";
+                  document.getElementById("submit-C0Q7").style.backgroundColor="#b8b8b8";
+                  document.getElementById("submit-C0Q7").style.border="1px solid #b8b8b8";
+                  
+                       document.getElementById("ansshowC0Q7").innerHTML="<img src='images/green-right-img.png' class='wrong-ans'><p class='scrollpane'><strong>Correct:</strong> 1-B, 2-C, 3-D and 4-A.</p>";
+                       score= parseInt(score) + 10;
+                       document.getElementById("score").innerHTML=score;
+                  setCookie('MyScore',score,365);
+                       document.getElementById("submit-C0Q7").disabled=true;
+                   }
+                   else{
+                  document.getElementById("ansshowC0Q7").style.display="block";
+                       document.getElementById("ansshowC0Q7").style.backgroundColor="#FFFFFF";
+                       document.getElementById("ansshowC0Q7").innerHTML="<img src='images/red-cross-img.png' class='wrong-ans'><p class='scrollpane'><strong>Incorrect:</strong> Options A,C and D are incorrect.</p>";
+                  document.getElementById("startOver-Q7").style.display="block";
+                  document.getElementById("submit-C0Q7").style.backgroundColor="#b8b8b8";
+                  document.getElementById("submit-C0Q7").style.border="1px solid #b8b8b8";
+                  
+                   }
+               } 
+             }
+             
+         </script>
+      
+      <div class="ansshow" id="ansshowC0Q7"><img src="" id="right-wrong6"></div>
+                
+       </div>
+         </div>
+      </div>
+      </div>
+         
+      <div id="browsericons">
+         <!--<img src="images/browser_icons+ie.png" alt="browser_icons+ie" width="386" height="45" />-->
+      </div>
+      <div class="footertext dintext">
+        <span class="pull-left"><p class="mrgnLft">Warm Up Module</p></span>
+        <span class="pull-center"><p class="">Page 17</p></span>
+      </div>
+   </div>
+<!-- End Page 17 here -->
+<!-- Start Page 18 here -->
+<!-- End Chapter 0 Page here-->
+<!-- Start Chapter 1 Page here-->
+<div class="page">
+   <div class="page-intro">
+      <div id="featurelist page-intro">
+         <h6>Chapter 1</h6>
+       <h2>Introduction to 3D Visualization</h2>
+      </div>
+      <div id="browsericons">
+         <!--<img src="images/browser_icons+ie.png" alt="browser_icons+ie" width="386" height="45" />-->
+      </div>   
+      <div class="footertext dintext">
+      <span class="pull-left"><p class="">Introduction to 3D Visualization</p></span>
+      <span class="pull-center"><p class="">Page 18</p></span>
+      </div>
+      </div>
+   </div>
+<!-- End Page 18 here -->
+<!-- Start Page 19 here -->
+<div class="page">
+   <a href="javascript:bookmarkThispage(19,'left');" id="bkActionId_19" bookmarked="0" ><img class="bookmark pull-left" src="images/bookmark-outline.png"></a>
+    
+      <div class="header">
+         <h2>Introduction to 3D Visualization</h2>
+      </div>
+      <div id="featurelist">
+         <div class="row">
+            <div class="col col-100">
+               <p>This section focusses on concepts on Visualizing 2D Views of a 3D Object, Visualize Shapes at Right Angle, Identifying Hidden Surfaces, and Constructing a 3D Object from 2D Views.</p>
+               <iframe class="img-srcl" width="400px" height="195" src="https://www.youtube.com/embed/9sL2vC_Yq14?rel=0" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>            </div>
+           <div class="section">  
+   
+      </div>
+      </div>
+      </div>
+         
+      <div id="browsericons">
+         <!--<img src="images/browser_icons+ie.png" alt="browser_icons+ie" width="386" height="45" />-->
+      </div>
+      <div class="footertext dintext">
+        <span class="pull-left"><p class="mrgnLft">Introduction to 3D Visualization</p></span>
+        <span class="pull-center"><p class="">Page 19</p></span>
+      </div>
+   </div>
+
+
+<!-- End Page 19 here -->
+<!-- Start Page 20 here -->
+<div class="page">
+<a href="javascript:bookmarkThispage(20,'right');" id="bkActionId_20" bookmarked="0" ><img class="bookmark pull-right" src="images/bookmark-outline.png"></a>
+ 
+   <div class="header">
+      <h2>Visualizing 2D Views of a 3D Object</h2>
+      
+   </div>
+   <div id="featurelist">
+      <div class="row">
+         <div class="col col-100">
+         	<p>This video introduces you to important steps of visualization: identifying surfaces and shapes.</p>
+               <iframe class="img-srcl" width="400px" height="195" src="https://www.youtube.com/embed/21sut6ceWuU?rel=0" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+            </div>
+        <div class="section">  
+<div class="qus-wrap"> 
+        <div align="left">
+        <p><span class="start qus-margin-top"><b>Que.</b></span>Which view will you see from the observer’s viewpoint?</p></div>  
+        <div class="clearfix"></div>
+        <div class="pull-left">
+        <span class="start"><b>Ans.</b></span>
+        </div>
+
+        <div class="option-right">
+         <div class="radio">
+            <label><input name="C1Q1Answer" type="radio" value="Option-A" id="optC1-1-1"/>Top View</label>
+        </div>
+        <div class="radio">
+            <label><input name="C1Q1Answer" type="radio" value="Option-B" id="optC1-1-2"/>Front view</label>
+        </div>
+        <div class="clearfix"></div>
+        </div>
+        <div class="option-left">
+     <div class="radio">
+            <label><input name="C1Q1Answer" type="radio" value="Option-C" id="optC1-1-3"/>Side view</label>
+        </div>
+         </div>
+       </div>
+        
+       <div class="clearfix"></div>
+       <div class="button-group">  
+     <button type="button" class="btn btn02 pull-center" onclick="javascript:showAnscC1Q1();" id="submit-C1Q1">Submit</button>
+     <button type="button" class="btn pull-right btn-start-over" id="startOver-C1Q1" style="display:none">Show Answer</button>
+     
+      <script type="text/javascript">
+	  		document.getElementById('startOver-C1Q1').addEventListener('click', function () {
+			   document.getElementById("ansshowC1Q1").innerHTML="<img src='images/green-right-img.png' class='wrong-ans'><p class='answer-corr scrollpane'>  <strong>Answer<br></strong> The surface seen from the observer’s viewpoint is always labelled as front, hence the view is front view.</p>"; 
+			   document.getElementById("optC1-1-2").checked=true;
+               document.getElementById("submit-C1Q1").disabled=true;
+             });
+			 
+            function showAnscC1Q1() {
+              if (!$('input[name="C1Q1Answer"]').is(':checked')) {
+                   alert("You have not selected any option !");
+                return false;
+            }
+            else{
+            var value = document.getElementById("optC1-1-2").checked;
+                if(value==true){
+									  document.getElementById("startOver-C1Q1").style.display="none";
+										document.getElementById("ansshowC1Q1").style.display="block";
+                    document.getElementById("ansshowC1Q1").style.backgroundColor="#FFFFFF";
+										document.getElementById("submit-C1Q1").style.backgroundColor="#b8b8b8";
+										document.getElementById("submit-C1Q1").style.border="1px solid #b8b8b8";
+                    document.getElementById("ansshowC1Q1").innerHTML="<img src='images/green-right-img.png' class='wrong-ans'><p class='scrollpane'><strong>Correct:</strong> The surface seen from the observer’s viewpoint is always labelled as front, hence the view is front view.</p>";
+                    score= parseInt(score) + 10;
+                    document.getElementById("score").innerHTML=score;
+					setCookie('MyScore',score,365);
+                    document.getElementById("submit-C1Q1").disabled=true;
+                }
+                else{
+					document.getElementById("ansshowC1Q1").style.display="block";
+                    document.getElementById("ansshowC1Q1").style.backgroundColor="#FFFFFF";
+                    document.getElementById("ansshowC1Q1").innerHTML="<img src='images/red-cross-img.png' class='wrong-ans'><p class='scrollpane'><strong>Incorrect:</strong> The surface seen from the observer’s viewpoint is always labelled as front, hence the view is front view.</p>";
+					document.getElementById("startOver-C1Q1").style.display="block";
+					document.getElementById("submit-C1Q1").style.backgroundColor="#b8b8b8";
+					document.getElementById("submit-C1Q1").style.border="1px solid #b8b8b8";
+                }
+             }
+           } 
+      </script>
+   
+   <div class="ansshow" id="ansshowC1Q1"><img src="" id="right-wrongC1Q1"></div>
+             
+    </div>
+   </div>
+   </div>
+   </div>
+      
+   <div id="browsericons">
+      <!--<img src="images/browser_icons+ie.png" alt="browser_icons+ie" width="386" height="45" />-->
+   </div>
+   <div class="footertext dintext">
+     <span class="pull-left"><p class="mrgnLft">Introduction to 3D Visualization</p></span>
+     <span class="pull-center"><p class="">Page 20</p></span>
+   </div>
+</div>
+<!-- End Page 20 here -->
+<!-- Start Page 21 here -->
+<div class="page">
+      <a href="javascript:bookmarkThispage(21,'left');" id="bkActionId_21" bookmarked="0" ><img class="bookmark pull-left" src="images/bookmark-outline.png"></a>
+       
+         <div class="header">
+            <h2>Visualize Shapes at Right Angle</h2>
+            
+         </div>
+         <div id="featurelist">
+            <div class="row">
+               <div class="col col-100"><p>In this video, you will learn the process of visualizing shapes at right angle.</p>
+                     <iframe class="img-srcl" width="400px" height="195" src="https://www.youtube.com/embed/2tjSMXF9EnY?rel=0" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+                  </div>
+                  
+               <img id="zoom4" src="images/LbD_1.3.1_Question_1_figure.jpg" alt="browser_icons+ie" width="100%" height="100%" onclick="imgpopup('images/LbD_1.3.1_Question_1_figure.jpg')" />
+               
+                        
+              <div class="section">  
+      <div class="qus-wrap"> 
+              <div align="left">
+              <p><span class="start qus-margin-top"><b>Que.</b></span>For the given 3D object, identify the correct set of 2D views.</p></div>  
+              <div class="clearfix"></div>
+              <div class="pull-left">
+              <span class="start"><b>Ans.</b></span>
+              </div>
+      
+              <div class="option-right">
+               <div class="radio">
+                  <label><input name="C1Q2Answer" type="radio" value="Option-A" id="optC1-2-1"/>Set A</label>
+              </div>
+              <div class="radio">
+                  <label><input name="C1Q2Answer" type="radio" value="Option-B" id="optC1-2-2"/>Set B</label>
+              </div>
+              <div class="clearfix"></div>
+              </div>
+              <div class="option-left">
+           <div class="radio">
+                  <label><input name="C1Q2Answer" type="radio" value="Option-C" id="optC1-2-3"/>Set C</label>
+              </div>
+               </div>
+             </div>
+              
+             <div class="clearfix"></div>
+             <div class="button-group">  
+           <button type="button" class="btn btn02 pull-center" onclick="javascript:showAnscC1Q2();" id="submit-C1Q2">Submit</button>
+           <button type="button" class="btn pull-right btn-start-over" id="startOver-C1Q2" style="display:none">Show Answer</button>
+           
+            <script type="text/javascript">
+                 document.getElementById('startOver-C1Q2').addEventListener('click', function () {
+                  document.getElementById("ansshowC1Q2").innerHTML="<img src='images/green-right-img.png' class='wrong-ans'><p class='answer-corr scrollpane'>  <strong>Answer<br></strong> In order to visualize the different 2D views, you need to rotate the object or the surface.</p>"; 
+                  document.getElementById("optC1-2-2").checked=true;
+                     document.getElementById("submit-C1Q2").disabled=true;
+                   });
+                
+                  function showAnscC1Q2() {
+                    if (!$('input[name="C1Q2Answer"]').is(':checked')) {
+                         alert("You have not selected any option !");
+                      return false;
+                  }
+                  else{
+                  var value = document.getElementById("optC1-2-2").checked;
+                      if(value==true){
+                                   document.getElementById("startOver-C1Q2").style.display="none";
+                                    document.getElementById("ansshowC1Q2").style.display="block";
+                          document.getElementById("ansshowC1Q2").style.backgroundColor="#FFFFFF";
+                                    document.getElementById("submit-C1Q2").style.backgroundColor="#b8b8b8";
+                                    document.getElementById("submit-C1Q2").style.border="1px solid #b8b8b8";
+                          document.getElementById("ansshowC1Q2").innerHTML="<img src='images/green-right-img.png' class='wrong-ans'><p class='scrollpane'><strong>Correct:</strong> In order to visualize the different 2D views, you need to rotate the object or the surface.</p>";
+                          score= parseInt(score) + 10;
+                          document.getElementById("score").innerHTML=score;
+                     setCookie('MyScore',score,365);
+                          document.getElementById("submit-C1Q2").disabled=true;
+                      }
+                      else{
+                     document.getElementById("ansshowC1Q2").style.display="block";
+                          document.getElementById("ansshowC1Q2").style.backgroundColor="#FFFFFF";
+                          document.getElementById("ansshowC1Q2").innerHTML="<img src='images/red-cross-img.png' class='wrong-ans'><p class='scrollpane'><strong>Incorrect:</strong> In order to visualize the different 2D views, you need to rotate the object or the surface.</p>";
+                     document.getElementById("startOver-C1Q2").style.display="block";
+                     document.getElementById("submit-C1Q2").style.backgroundColor="#b8b8b8";
+                     document.getElementById("submit-C1Q2").style.border="1px solid #b8b8b8";
+                      }
+                   }
+                 } 
+            </script>
+         
+         <div class="ansshow" id="ansshowC1Q2"><img src="" id="right-wrongC1Q2"></div>
+                   
+          </div>
+         </div>
+         </div>
+         </div>
+            
+         <div id="browsericons">
+            <!--<img src="images/browser_icons+ie.png" alt="browser_icons+ie" width="386" height="45" />-->
+         </div>
+         <div class="footertext dintext">
+           <span class="pull-left"><p class="mrgnLft">Introduction to 3D Visualization</p></span>
+           <span class="pull-center"><p class="">Page 21</p></span>
+         </div>
+      </div>
+
+<!-- End Page 21 here -->
+<!-- Start Page 22 here -->
+<div class="page">
+   <a href="javascript:bookmarkThispage(22,'right');" id="bkActionId_22" bookmarked="0" ><img class="bookmark pull-right" src="images/bookmark-outline.png"></a>
+    
+      <div class="header">
+         <h2>Identifying Hidden Surfaces</h2>
+         
+      </div>
+      <div id="featurelist">
+         <div class="row">
+            <div class="col col-100"><p>Ever wondered what hidden surfaces of an object look like? In this video you will also learn how to represent them.</p>
+               <iframe class="img-srcl" width="400px" height="195" src="https://www.youtube.com/embed/ptbLUPRwYUk?rel=0" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+            </div>
+                   
+               <img id="zoom5" src="images/LbD_1.4small.jpg" alt="C2Q3" width="100%" height="100%" onclick="imgpopup('images/LbD_1.4.1_Question_Figure.jpg')" />
+               
+
+           <div class="section">  
+   <div class="qus-wrap"> 
+           <div align="left">
+           <p><span class="start qus-margin-top"><b>Que.</b></span>Observe the given 3D object and its front and top views. Identify the correct right side view of this object.</p></div>  
+           <div class="clearfix"></div>
+           <div class="pull-left">
+           <span class="start"><b>Ans.</b></span>
+           </div>
+   
+           <div class="option-right">
+            <div class="radio">
+               <label><input name="C1Q3Answer" type="radio" value="Option-A" id="optC1-3-1"/>A</label>
+           </div>
+           <div class="radio">
+               <label><input name="C1Q3Answer" type="radio" value="Option-B" id="optC1-3-2"/>B</label>
+           </div>
+           <div class="clearfix"></div>
+           </div>
+           <div class="option-left">
+        <div class="radio">
+               <label><input name="C1Q3Answer" type="radio" value="Option-C" id="optC1-3-3"/>C</label>
+           </div>
+        <div class="radio">
+               <label><input name="C1Q3Answer" type="radio" value="Option-C" id="optC1-3-4"/>D</label>
+           </div>
+            </div>
+          </div>
+           
+          <div class="clearfix"></div>
+          <div class="button-group">  
+        <button type="button" class="btn btn02 pull-center" onclick="javascript:showAnscC1Q3();" id="submit-C1Q3">Submit</button>
+        <button type="button" class="btn pull-right btn-start-over" id="startOver-C1Q3" style="display:none">Show Answer</button>
+        
+         <script type="text/javascript">
+              document.getElementById('startOver-C1Q3').addEventListener('click', function () {
+               document.getElementById("ansshowC1Q3").innerHTML="<img src='images/green-right-img.png' class='wrong-ans'><p class='answer-corr scrollpane'>  <strong>Answer<br></strong> Answer D represents all the surfaces of the given 3D object, including the hidden surface.</p>"; 
+               document.getElementById("optC1-3-4").checked=true;
+                  document.getElementById("submit-C1Q3").disabled=true;
+                });
+             
+               function showAnscC1Q3() {
+                 if (!$('input[name="C1Q3Answer"]').is(':checked')) {
+                      alert("You have not selected any option !");
+                   return false;
+               }
+               else{
+               var value = document.getElementById("optC1-3-4").checked;
+                   if(value==true){
+                                document.getElementById("startOver-C1Q3").style.display="none";
+                                 document.getElementById("ansshowC1Q3").style.display="block";
+                       document.getElementById("ansshowC1Q3").style.backgroundColor="#FFFFFF";
+                                 document.getElementById("submit-C1Q3").style.backgroundColor="#b8b8b8";
+                                 document.getElementById("submit-C1Q3").style.border="1px solid #b8b8b8";
+                       document.getElementById("ansshowC1Q3").innerHTML="<img src='images/green-right-img.png' class='wrong-ans'><p class='scrollpane'><strong>Correct:</strong> Answer D represents all the surfaces of the given 3D object, including the hidden surface.</p>";
+                       score= parseInt(score) + 10;
+                       document.getElementById("score").innerHTML=score;
+                  setCookie('MyScore',score,365);
+                       document.getElementById("submit-C1Q3").disabled=true;
+                   }
+                   else{
+                  document.getElementById("ansshowC1Q3").style.display="block";
+                       document.getElementById("ansshowC1Q3").style.backgroundColor="#FFFFFF";
+                       document.getElementById("ansshowC1Q3").innerHTML="<img src='images/red-cross-img.png' class='wrong-ans'><p class='scrollpane'><strong>Incorrect:</strong> Check if all the surfaces and hidden surfaces are represented correctly.</p>";
+                  document.getElementById("startOver-C1Q3").style.display="block";
+                  document.getElementById("submit-C1Q3").style.backgroundColor="#b8b8b8";
+                  document.getElementById("submit-C1Q3").style.border="1px solid #b8b8b8";
+                   }
+                }
+              } 
+         </script>
+      
+      <div class="ansshow" id="ansshowC1Q3"><img src="" id="right-wrongC1Q3"></div>
+                
+       </div>
+      </div>
+      </div>
+      </div>
+         
+      <div id="browsericons">
+         <!--<img src="images/browser_icons+ie.png" alt="browser_icons+ie" width="386" height="45" />-->
+      </div>
+      <div class="footertext dintext">
+        <span class="pull-left"><p class="mrgnLft">Introduction to 3D Visualization</p></span>
+        <span class="pull-center"><p class="">Page 22</p></span>
+      </div>
+   </div>
+<!-- End Page 22 here -->
+<!-- Start Page 23 here -->
+<div class="page">
+   <a href="javascript:bookmarkThispage(23,'left');" id="bkActionId_23" bookmarked="0" ><img class="bookmark pull-left" src="images/bookmark-outline.png"></a>
+    
+      <div class="header">
+         <h2>Constructing a 3D Object from 2D Views</h2>
+         
+      </div>
+      <div id="featurelist">
+         <div class="row">
+            <div class="col col-100"><p>How can a 3D object be constructed from shapes and surfaces? Well, this is exactly what the following video deals with!</p>
+               <iframe class="img-srcl" width="400px" height="195" src="https://www.youtube.com/embed/gsUHLH06Gwg?rel=0" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>            </div>
+           <div class="section">  
+   
+      </div>
+      </div>
+      </div>
+         
+      <div id="browsericons">
+         <!--<img src="images/browser_icons+ie.png" alt="browser_icons+ie" width="386" height="45" />-->
+      </div>
+      <div class="footertext dintext">
+        <span class="pull-left"><p class="mrgnLft">Introduction to 3D Visualization</p></span>
+        <span class="pull-center"><p class="">Page 23</p></span>
+      </div>
+   </div>
+<!-- End Page 23 here -->
+<!-- Start Page 24 here -->
+<!-- End Chapter 1 Page here-->
+<!-- Start Chapter 2 Page here-->
+<div class="page">
+   <div class="page-intro">
+      <div id="featurelist page-intro">
+         <h6>Chapter 2</h6>
+       <h2>3D Visualization Using Tool</h2>
+       <p class="chapter-intro">In this section, you will get started with the actual creation of 3D objects using Blender, an open source 3D visualization tool. From installing Blender on your system to learning the fundamentals to creating your first 3D object on screen, this chapter gets you started on an exciting journey into the 3D world!</p>
+      </div>
+      <div id="browsericons">
+         <!--<img src="images/browser_icons+ie.png" alt="browser_icons+ie" width="386" height="45" />-->
+      </div>   
+      <div class="footertext dintext">
+      <span class="pull-left"><p class="">3D Visualization Using Tool</p></span>
+      <span class="pull-center"><p class="">Page 24</p></span>
+      </div>
+      </div>
+   </div>
+<!-- End Page 24 here -->
+<!-- Start Page 25 here -->
+<div class="page">
+   <a href="javascript:bookmarkThispage(25,'left');" id="bkActionId_25" bookmarked="0" ><img class="bookmark pull-left" src="images/bookmark-outline.png"></a>
+      <div class="header">
+         <h2>Mental Rotation Skills</h2>
+      </div>
+      <div id="featurelist">
+         <div class="row">
+            <div class="col col-100"><br><p>In this video, we discuss the need for Mental Rotation skills, along with its applications in day-to-day life. You will also have a glimpse of how to perform Mental Rotation and Blender.</p>
+               <iframe class="img-srcl" width="400px" height="155" src="https://www.youtube.com/embed/fjVdzWtDFJY?rel=0" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+            </div>
+                     <!-- <img src="images/LbD1.png" alt="C2Q1" width="190" height="120" /> -->
+           <div class="section">  
+   <div class="qus-wrap"> 
+           <div align="left">
+           <p><span class="start qus-margin-top"><b>Que.</b></span>Observe the image below. A person (represented as a red dot) is going to the bookstore. The person will use the highlighted route to reach the bookstore. How many turns will he take to reach the destination?</p></div>  
+           <img src="images/LbD1.png" alt="C2Q1" width="190" height="70" onclick="imgpopup('images/LbD1.png')" />
+           <div class="clearfix"></div>
+           <div class="pull-left">
+           <span class="start"><b>Ans.</b></span>
+           </div>
+   
+           <div class="option-right">
+            <div class="radio">
+               <label><input name="C2Q1Answer" type="radio" value="Option-A" id="optC2-1-1"/>4 Left and 3 Right</label>
+           </div>
+           <div class="radio">
+               <label><input name="C2Q1Answer" type="radio" value="Option-B" id="optC2-1-2"/>5 Left and 2 Right</label>
+           </div>
+           <div class="clearfix"></div>
+           </div>
+           <div class="option-left">
+        <div class="radio">
+               <label><input name="C2Q1Answer" type="radio" value="Option-C" id="optC2-1-3"/>5 Left and 3 Right</label>
+           </div>
+        <div class="radio">
+               <label><input name="C2Q1Answer" type="radio" value="Option-C" id="optC2-1-4"/>4 Left and 2 Right</label>
+           </div>
+            </div>
+          </div>
+           
+          <div class="clearfix"></div>
+          <div class="button-group">  
+        <button type="button" class="btn btn02 pull-center" onclick="javascript:showAnscC2Q1();" id="submit-C2Q1">Submit</button>
+        <button type="button" class="btn pull-right btn-start-over" id="startOver-C2Q1" style="display:none">Show Answer</button>
+        
+         <script type="text/javascript">
+              document.getElementById('startOver-C2Q1').addEventListener('click', function () {
+               document.getElementById("ansshowC2Q1").innerHTML="<img src='images/green-right-img.png' class='wrong-ans'><p class='answer-corr scrollpane'>  <strong>Answer<br></strong> A person will take 5 left and 3 right turns to reach at bookstore with a highlighted route.</p>"; 
+               document.getElementById("optC2-1-3").checked=true;
+                  document.getElementById("submit-C2Q1").disabled=true;
+                });
+             
+               function showAnscC2Q1() {
+                 if (!$('input[name="C2Q1Answer"]').is(':checked')) {
+                      alert("You have not selected any option !");
+                   return false;
+               }
+               else{
+               var value = document.getElementById("optC2-1-3").checked;
+                   if(value==true){
+                                document.getElementById("startOver-C2Q1").style.display="none";
+                                 document.getElementById("ansshowC2Q1").style.display="block";
+                       document.getElementById("ansshowC2Q1").style.backgroundColor="#FFFFFF";
+                                 document.getElementById("submit-C2Q1").style.backgroundColor="#b8b8b8";
+                                 document.getElementById("submit-C2Q1").style.border="1px solid #b8b8b8";
+                       document.getElementById("ansshowC2Q1").innerHTML="<img src='images/green-right-img.png' class='wrong-ans'><p class='scrollpane'><strong>Correct:</strong> A person will take 5 left and 3 right turns to reach at bookstore with a highlighted route.</p>";
+                       score= parseInt(score) + 10;
+                       document.getElementById("score").innerHTML=score;
+                  setCookie('MyScore',score,365);
+                       document.getElementById("submit-C2Q1").disabled=true;
+                   }
+                   else{
+                  document.getElementById("ansshowC2Q1").style.display="block";
+                       document.getElementById("ansshowC2Q1").style.backgroundColor="#FFFFFF";
+                       document.getElementById("ansshowC2Q1").innerHTML="<img src='images/red-cross-img.png' class='wrong-ans'><p class='scrollpane'><strong>Incorrect:</strong> Check if the right and left turn are correct.</p>";
+                  document.getElementById("startOver-C2Q1").style.display="block";
+                  document.getElementById("submit-C2Q1").style.backgroundColor="#b8b8b8";
+                  document.getElementById("submit-C2Q1").style.border="1px solid #b8b8b8";
+                   }
+                }
+              } 
+         </script>
+      
+      <div class="ansshow" id="ansshowC2Q1"><img src="" id="right-wrongC2Q1"></div>
+                
+       </div>
+      </div>
+      </div>
+      </div>
+         
+      <div id="browsericons">
+      </div>
+      <div class="footertext dintext">
+        <span class="pull-left"><p class="mrgnLft">3D Visualization Using Tool</p></span>
+        <span class="pull-center"><p class="">Page 25</p></span>
+      </div>
+   </div>
+<!-- End Page 25 here -->
+<!-- Start Page 26 here -->
+<div class="page">
+   <a href="javascript:bookmarkThispage(26,'right');" id="bkActionId_26" bookmarked="0" ><img class="bookmark pull-right" src="images/bookmark-outline.png"></a>
+    
+      <div class="header">
+         <h2>Blender Installation: Windows</h2>
+         
+      </div>
+      <div id="featurelist">
+         <div class="row">
+            <div class="col col-100"><p class="vid-intro">Get ready for some action: Learn how to download and install Blender on your system with Windows platform.</p>
+               <iframe class="img-srcl" width="400px" height="195" src="https://www.youtube.com/embed/3_lLbouekqY?rel=0" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>           
+            </div>
+           <div class="section"></div>
+      </div>
+      </div>
+         
+      <div id="browsericons">
+      </div>
+      <div class="footertext dintext">
+        <span class="pull-left"><p class="mrgnLft">3D Visualization Using Tool</p></span>
+        <span class="pull-center"><p class="">Page 26</p></span>
+      </div>
+   </div>
+<!-- End Page 26 here -->
+<!-- Start Page 27 here -->
+<div class="page">
+   <a href="javascript:bookmarkThispage(27,'left');" id="bkActionId_27" bookmarked="0" ><img class="bookmark pull-left" src="images/bookmark-outline.png"></a>
+    
+      <div class="header">
+         <h2>Blender Installation: Linux</h2>
+         
+      </div>
+      <div id="featurelist">
+         <div class="row">
+            <div class="col col-100"><p class="vid-intro">Get ready for some action: learn how to download and install Blender on your system with Linux platform.</p>
+               <iframe class="img-srcl" width="400px" height="195" src="https://www.youtube.com/embed/DIDt4_1xSdQ?rel=0" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>            </div>
+           <div class="section">  
+   
+      </div>
+      </div>
+      </div>
+         
+      <div id="browsericons">
+      </div>
+      <div class="footertext dintext">
+        <span class="pull-left"><p class="mrgnLft">3D Visualization Using Tool</p></span>
+        <span class="pull-center"><p class="">Page 27</p></span>
+      </div>
+   </div>
+<!-- End Page 27 here -->
+<!-- Start Page 28 here -->
+<div class="page">
+   <a href="javascript:bookmarkThispage(28,'right');" id="bkActionId_28" bookmarked="0" ><img class="bookmark pull-right" src="images/bookmark-outline.png"></a>
+    
+      <div class="header">
+         <h2>Blender Installation: Mac OS</h2>
+         
+      </div>
+      <div id="featurelist">
+         <div class="row">
+            <div class="col col-100"><p class="vid-intro">Get ready for some action: learn how to download and install Blender on your system with Mac OS platform.</p>
+               <iframe class="img-srcl" width="400px" height="195" src="https://www.youtube.com/embed/OWlYUgx4pkQ?rel=0" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>            </div>
+           <div class="section"></div>
+      </div>
+      </div>
+         
+      <div id="browsericons">
+      </div>
+      <div class="footertext dintext">
+        <span class="pull-left"><p class="mrgnLft">3D Visualization Using Tool</p></span>
+        <span class="pull-center"><p class="">Page 28</p></span>
+      </div>
+   </div>
+<!-- End Page 28 here -->
+<!-- Start Page 29 here -->
+<div class="page">
+   <a href="javascript:bookmarkThispage(29,'left');" id="bkActionId_29" bookmarked="0" ><img class="bookmark pull-left" src="images/bookmark-outline.png"></a>
+    
+      <div class="header">
+         <h2>Blender Interface</h2>
+         
+      </div>
+      <div id="featurelist">
+         <div class="row">
+            <div class="col col-100"><p>Understanding the Blender interface thoroughly is primary to perform modeling or animation. Let’s explore the various windows, cursors, keyboard shortcuts and more. Let’s get started!
+         </p>
+               <iframe class="img-srcl" width="400px" height="195" src="https://www.youtube.com/embed/Y0mrCg2qjmc?rel=0" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>            </div>
+           <div class="section">  
+   
+      </div>
+      </div>
+      </div>
+         
+      <div id="browsericons">
+      </div>
+      <div class="footertext dintext">
+        <span class="pull-left"><p class="mrgnLft">3D Visualization Using Tool</p></span>
+        <span class="pull-center"><p class="">Page 29</p></span>
+      </div>
+   </div>
+<!-- End Page 29 here -->
+<!-- Start Page 30 here -->
+<div class="page">
+   <a href="javascript:bookmarkThispage(30,'right');" id="bkActionId_30" bookmarked="0" ><img class="bookmark pull-right" src="images/bookmark-outline.png"></a>
+    
+      <div class="header">
+         <h2>Mouse Input</h2>
+         
+      </div>
+      <div id="featurelist">
+         <div class="row">
+            <div class="col col-100">
+            	<p>Mouse and keyboard inputs together play a crucial role in a visualization tool like Blender. In this video, we explore the use of these input tools to master the workspace.</p>
+               <iframe class="img-srcl" width="400px" height="195" src="https://www.youtube.com/embed/Xffgscp8ymM?rel=0" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+            </div>
+           <div class="section">  
+   <div class="qus-wrap"> 
+           <div align="left">
+           <p><span class="start qus-margin-top"><b>Que.</b></span>Which keyboard shortcut is used to delete an object from the scene?</p></div>  
+           <div class="clearfix"></div>
+           <div class="pull-left">
+           <span class="start"><b>Ans.</b></span>
+           </div>
+   
+           <div class="option-right">
+            <div class="radio">
+               <label><input name="C2Q2Answer" type="radio" value="Option-A" id="optC2-2-1"/>A</label>
+           </div>
+           <div class="radio">
+               <label><input name="C2Q2Answer" type="radio" value="Option-B" id="optC2-2-2"/>Z</label>
+           </div>
+           <div class="clearfix"></div>
+           </div>
+           <div class="option-left">
+        <div class="radio">
+               <label><input name="C2Q2Answer" type="radio" value="Option-C" id="optC2-2-3"/>X or Delete</label>
+           </div>
+            </div>
+          </div>
+           
+          <div class="clearfix"></div>
+          <div class="button-group">  
+        <button type="button" class="btn btn02 pull-center" onclick="javascript:showAnscC2Q2();" id="submit-C2Q2">Submit</button>
+        <button type="button" class="btn pull-right btn-start-over" id="startOver-C2Q2" style="display:none">Show Answer</button>
+        
+         <script type="text/javascript">
+              document.getElementById('startOver-C2Q2').addEventListener('click', function () {
+               document.getElementById("ansshowC2Q2").innerHTML="<img src='images/green-right-img.png' class='wrong-ans'><p class='answer-corr scrollpane'>  <strong>Answer<br></strong> \"X or Delete\" keybaord shortcut uesd to delete an obejct. </p>"; 
+               document.getElementById("optC2-2-3").checked=true;
+                  document.getElementById("submit-C2Q2").disabled=true;
+                });
+             
+               function showAnscC2Q2() {
+                 if (!$('input[name="C2Q2Answer"]').is(':checked')) {
+                      alert("You have not selected any option !");
+                   return false;
+               }
+               else{
+               var value = document.getElementById("optC2-2-3").checked;
+                   if(value==true){
+                                document.getElementById("startOver-C2Q2").style.display="none";
+                                 document.getElementById("ansshowC2Q2").style.display="block";
+                       document.getElementById("ansshowC2Q2").style.backgroundColor="#FFFFFF";
+                                 document.getElementById("submit-C2Q2").style.backgroundColor="#b8b8b8";
+                                 document.getElementById("submit-C2Q2").style.border="1px solid #b8b8b8";
+                       document.getElementById("ansshowC2Q2").innerHTML="<img src='images/green-right-img.png' class='wrong-ans'><p class='scrollpane'><strong>Correct:</strong> \"X or Delete\" keybaord shortcut uesd to delete an obejct. </p>";
+                       score= parseInt(score) + 10;
+                       document.getElementById("score").innerHTML=score;
+                  setCookie('MyScore',score,365);
+                       document.getElementById("submit-C2Q2").disabled=true;
+                   }
+                   else{
+                  document.getElementById("ansshowC2Q2").style.display="block";
+                       document.getElementById("ansshowC2Q2").style.backgroundColor="#FFFFFF";
+                       document.getElementById("ansshowC2Q2").innerHTML="<img src='images/red-cross-img.png' class='wrong-ans'><p class='scrollpane'><strong>Incorrect:</strong> To delete an obejct need to use \"X or Delete\" keyboard shortcut.</p>";
+                  document.getElementById("startOver-C2Q2").style.display="block";
+                  document.getElementById("submit-C2Q2").style.backgroundColor="#b8b8b8";
+                  document.getElementById("submit-C2Q2").style.border="1px solid #b8b8b8";
+                   }
+                }
+              } 
+         </script>
+      
+      <div class="ansshow" id="ansshowC2Q2"><img src="" id="right-wrongC2Q2"></div>
+                
+       </div>
+      </div>
+      </div>
+      </div>
+         
+      <div id="browsericons">
+      </div>
+      <div class="footertext dintext">
+        <span class="pull-left"><p class="mrgnLft">3D Visualization Using Tool</p></span>
+        <span class="pull-center"><p class="">Page 30</p></span>
+      </div>
+   </div>
+<!-- End Page 30 here -->
+<!-- Start Page 31 here -->
+<div class="page">
+   <a href="javascript:bookmarkThispage(31,'left');" id="bkActionId_31" bookmarked="0" ><img class="bookmark pull-left" src="images/bookmark-outline.png"></a>
+    
+      <div class="header">
+         <h2>Numpad Preference</h2>
+         
+      </div>
+      <div id="featurelist">
+         <div class="row">
+            <div class="col col-100">
+            	<p class="vid-intro">Blender provides for a special preference to emulate a Numpad (specifically for laptop users) on screen. Let’s figure out how!</p>
+               <iframe class="img-srcl" width="400px" height="195" src="https://www.youtube.com/embed/0qiDhjaL6PU?rel=0" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+            </div>
+           <div class="section">  
+   <div class="qus-wrap"> 
+           <div align="left">
+           <p><span class="start qus-margin-top"><b>Que.</b></span>What is the keyboard shortcut to see the Quad view?</p></div>  
+           <div class="clearfix"></div>
+           <div class="pull-left">
+           <span class="start"><b>Ans.</b></span>
+           </div>
+   
+           <div class="option-right">
+            <div class="radio">
+               <label><input name="C2Q3Answer" type="radio" value="Option-A" id="optC2-3-1"/>Ctrl + A</label>
+           </div>
+           <div class="radio">
+               <label><input name="C2Q3Answer" type="radio" value="Option-B" id="optC2-3-2"/>Ctrl + Shift +Q</label>
+           </div>
+           <div class="clearfix"></div>
+           </div>
+           <div class="option-left">
+         <div class="radio">
+               <label><input name="C2Q3Answer" type="radio" value="Option-C" id="optC2-3-3"/>Ctrl + Alt + Q</label>
+           </div>
+         <div class="radio">
+               <label><input name="C2Q3Answer" type="radio" value="Option-D" id="optC2-3-3"/>Shift + N</label>
+           </div>
+            </div>
+          </div>
+           
+          <div class="clearfix"></div>
+          <div class="button-group">  
+        <button type="button" class="btn btn02 pull-center" onclick="javascript:showAnscC2Q3();" id="submit-C2Q3">Submit</button>
+        <button type="button" class="btn pull-right btn-start-over" id="startOver-C2Q3" style="display:none">Show Answer</button>
+        
+         <script type="text/javascript">
+              document.getElementById('startOver-C2Q3').addEventListener('click', function () {
+               document.getElementById("ansshowC2Q3").innerHTML="<img src='images/green-right-img.png' class='wrong-ans'><p class='answer-corr scrollpane'>  <strong>Answer<br></strong> \"Ctrl + Alt + Q\" keyboard shortcut is used to see the Quad view. </p>"; 
+               document.getElementById("optC2-3-3").checked=true;
+                  document.getElementById("submit-C2Q3").disabled=true;
+                });
+             
+               function showAnscC2Q3() {
+                 if (!$('input[name="C2Q3Answer"]').is(':checked')) {
+                      alert("You have not selected any option !");
+                   return false;
+               }
+               else{
+               var value = document.getElementById("optC2-3-3").checked;
+                   if(value==true){
+                                document.getElementById("startOver-C2Q3").style.display="none";
+                                 document.getElementById("ansshowC2Q3").style.display="block";
+                       document.getElementById("ansshowC2Q3").style.backgroundColor="#FFFFFF";
+                                 document.getElementById("submit-C2Q3").style.backgroundColor="#b8b8b8";
+                                 document.getElementById("submit-C2Q3").style.border="1px solid #b8b8b8";
+                       document.getElementById("ansshowC2Q3").innerHTML="<img src='images/green-right-img.png' class='wrong-ans'><p class='scrollpane'><strong>Correct:</strong> \"Ctrl + Alt + Q\" keyboard shortcut is used to see the Quad view. </p>";
+                       score= parseInt(score) + 10;
+                       document.getElementById("score").innerHTML=score;
+                  setCookie('MyScore',score,365);
+                       document.getElementById("submit-C2Q3").disabled=true;
+                   }
+                   else{
+                  document.getElementById("ansshowC2Q3").style.display="block";
+                       document.getElementById("ansshowC2Q3").style.backgroundColor="#FFFFFF";
+                       document.getElementById("ansshowC2Q3").innerHTML="<img src='images/red-cross-img.png' class='wrong-ans'><p class='scrollpane'><strong>Incorrect:</strong> To see the Quad view need to use keyboard shortcut is \"Ctrl + Alt + Q\".</p>";
+                  document.getElementById("startOver-C2Q3").style.display="block";
+                  document.getElementById("submit-C2Q3").style.backgroundColor="#b8b8b8";
+                  document.getElementById("submit-C2Q3").style.border="1px solid #b8b8b8";
+                   }
+                }
+              } 
+         </script>
+      
+      <div class="ansshow" id="ansshowC2Q3"><img src="" id="right-wrongC2Q3"></div>
+                
+       </div>
+      </div>
+      </div>
+      </div>
+         
+      <div id="browsericons">
+      </div>
+      <div class="footertext dintext">
+        <span class="pull-left"><p class="mrgnLft">3D Visualization Using Tool</p></span>
+        <span class="pull-center"><p class="">Page 31</p></span>
+      </div>
+   </div>
+<!-- End Page 31 here -->
+<!-- Start Page 32 here -->
+<div class="page">
+   <a href="javascript:bookmarkThispage(32,'right');" id="bkActionId_32" bookmarked="0" ><img class="bookmark pull-right" src="images/bookmark-outline.png"></a>
+    
+      <div class="header">
+         <h2>Rotations and Multiple Views in Blender</h2>
+         
+      </div>
+      <div id="featurelist">
+         <div class="row">
+            <div class="col col-100"><p class="vid-intro">In this video, we delve deeper into exploring Blender utilities to visualize multiple views and perform operations like rotation of a 3D object.</p>
+               <iframe class="img-srcl" width="400px" height="195" src="https://www.youtube.com/embed/RHiVKAxa-nI?rel=0" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe></div>
+           <div class="section">  
+   
+      </div>
+      </div>
+      </div>
+         
+      <div id="browsericons">
+      </div>
+      <div class="footertext dintext">
+        <span class="pull-left"><p class="mrgnLft">3D Visualization Using Tool</p></span>
+        <span class="pull-center"><p class="">Page 32</p></span>
+      </div>
+   </div>
+<!-- End Page 32 here -->
+<!-- Start Page 33 here -->
+<div class="page">
+   <a href="javascript:bookmarkThispage(33,'left');" id="bkActionId_33" bookmarked="0" ><img class="bookmark pull-left" src="images/bookmark-outline.png"></a>
+    
+      <div class="header">
+         <h2>Constructing 3D Objects in Blender</h2>
+         
+      </div>
+      <div id="featurelist">
+         <div class="row">
+            <div class="col col-100"><p class="vid-intro">Can't wait to create your first 3D object in Blender? Let’s get started! We also look at various Blender shortcuts to achieve this goal. </p>
+               <iframe class="img-srcl" width="400px" height="195" src="https://www.youtube.com/embed/h1vOzfjKbgY?rel=0" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+            </div>
+           <div class="section">  
+   <div class="qus-wrap"> 
+           <div align="left">
+           <p><span class="start qus-margin-top"><b>Que.</b></span>What is the keyboard shortcut to Extrude a region?</p></div>  
+           <div class="clearfix"></div>
+           <div class="pull-left">
+           <span class="start"><b>Ans.</b></span>
+           </div>
+   
+           <div class="option-right">
+            <div class="radio">
+               <label><input name="C2Q4Answer" type="radio" value="Option-A" id="optC2-4-1"/>Alt + X</label>
+           </div>
+           <div class="radio">
+               <label><input name="C2Q4Answer" type="radio" value="Option-B" id="optC2-4-2"/>Ctrl + E</label>
+           </div>
+           <div class="clearfix"></div>
+           </div>
+           <div class="option-left">
+         <div class="radio">
+               <label><input name="C2Q4Answer" type="radio" value="Option-C" id="optC2-4-3"/>E</label>
+           </div>
+           </div>
+          </div>
+           
+          <div class="clearfix"></div>
+          <div class="button-group">  
+        <button type="button" class="btn btn02 pull-center" onclick="javascript:showAnscC2Q4();" id="submit-C2Q4">Submit</button>
+        <button type="button" class="btn pull-right btn-start-over" id="startOver-C2Q4" style="display:none">Show Answer</button>
+        
+         <script type="text/javascript">
+              document.getElementById('startOver-C2Q4').addEventListener('click', function () {
+               document.getElementById("ansshowC2Q4").innerHTML="<img src='images/green-right-img.png' class='wrong-ans'><p class='answer-corr scrollpane'>  <strong>Answer<br></strong> \"E\" keyboard shorctut is used to extrude a region.</p>"; 
+               document.getElementById("optC2-4-3").checked=true;
+                  document.getElementById("submit-C2Q4").disabled=true;
+                });
+             
+               function showAnscC2Q4() {
+                 if (!$('input[name="C2Q4Answer"]').is(':checked')) {
+                      alert("You have not selected any option !");
+                   return false;
+               }
+               else{
+               var value = document.getElementById("optC2-4-3").checked;
+                   if(value==true){
+                                document.getElementById("startOver-C2Q4").style.display="none";
+                                 document.getElementById("ansshowC2Q4").style.display="block";
+                       document.getElementById("ansshowC2Q4").style.backgroundColor="#FFFFFF";
+                                 document.getElementById("submit-C2Q4").style.backgroundColor="#b8b8b8";
+                                 document.getElementById("submit-C2Q4").style.border="1px solid #b8b8b8";
+                       document.getElementById("ansshowC2Q4").innerHTML="<img src='images/green-right-img.png' class='wrong-ans'><p class='scrollpane'><strong>Correct:</strong> \"E\" keyboard shorctut is used to extrude a region.</p>";
+                       score= parseInt(score) + 10;
+                       document.getElementById("score").innerHTML=score;
+                  setCookie('MyScore',score,365);
+                       document.getElementById("submit-C2Q4").disabled=true;
+                   }
+                   else{
+                  document.getElementById("ansshowC2Q4").style.display="block";
+                       document.getElementById("ansshowC2Q4").style.backgroundColor="#FFFFFF";
+                       document.getElementById("ansshowC2Q4").innerHTML="<img src='images/red-cross-img.png' class='wrong-ans'><p class='scrollpane'><strong>Incorrect:</strong>  To extrude a region need to use keyboard shortcut \"E\".</p>";
+                  document.getElementById("startOver-C2Q4").style.display="block";
+                  document.getElementById("submit-C2Q4").style.backgroundColor="#b8b8b8";
+                  document.getElementById("submit-C2Q4").style.border="1px solid #b8b8b8";
+                   }
+                }
+              } 
+         </script>
+      
+      <div class="ansshow" id="ansshowC2Q4"><img src="" id="right-wrongC2Q4"></div>
+                
+       </div>
+      </div>
+      </div>
+      </div>
+         
+      <div id="browsericons">
+      </div>
+      <div class="footertext dintext">
+        <span class="pull-left"><p class="mrgnLft">3D Visualization Using Tool</p></span>
+        <span class="pull-center"><p class="">Page 33</p></span>
+      </div>
+   </div>
+<!-- End Page 33 here -->
+<!-- Start Page 34 here -->
+<div class="page">
+   <a href="javascript:bookmarkThispage(34,'right');" id="bkActionId_34" bookmarked="0" ><img class="bookmark pull-right" src="images/bookmark-outline.png"></a>
+    
+      <div class="header">
+         <h2>Constructing "Engineering Drawing" Objects in Blender</h2>
+         
+      </div>
+      <div id="featurelist">
+         <div class="row">
+            <div class="col col-100"><br>
+            	<p class="vid-intro">Let’s take a step ahead to create shapes, simple 3D objects along with a slightly challenging model.</p>
+               <iframe class="img-srcl" width="400px" height="195" src="https://www.youtube.com/embed/DGkLmK-hDYY?rel=0" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe></div>
+           <div class="section">  
+   
+      </div>
+      </div>
+      </div>
+         
+      <div id="browsericons">
+      </div>
+      <div class="footertext dintext">
+        <span class="pull-left"><p class="mrgnLft">3D Visualization Using Tool</p></span>
+        <span class="pull-center"><p class="">Page 34</p></span>
+      </div>
+   </div>
+<!-- End Page 34 here -->
+<!-- Start Page 35 here -->
+<!-- End chapter 2 here -->
+<!-- Start chapter 3 here -->
+<div class="page">
+   <div class="page-intro">
+      <div id="featurelist page-intro">
+         <h6>Chapter 3</h6>
+       <h2>Constructing 3D Objects: Extended </h2>
+       <p class="chapter-intro">There are various methods that you can use to visualize 3D objects. The Box Method is one such method which we will explore in this chapter along with the Quad View feature of Blender. We also look at an important aspect of visualization: planning the construction!</p>
+      </div>
+      <div id="browsericons">
+         <!--<img src="images/browser_icons+ie.png" alt="browser_icons+ie" width="386" height="45" />-->
+      </div>   
+      <div class="footertext dintext">
+      <span class="pull-left"><p class="">Constructing 3D Objects: Extended</p></span>
+      <span class="pull-center"><p class="">Page 35</p></span>
+      </div>
+      </div>
+   </div>
+<!-- End Page 35 here -->
+<!-- Start Page 36 here -->
+<div class="page">
+      <a href="javascript:bookmarkThispage(36,'right');" id="bkActionId_36" bookmarked="0" ><img class="bookmark pull-right" src="images/bookmark-outline.png"></a>
+       
+         <div class="header">
+            <h2>Visualizing Using Box Method & Construction in Blender</h2>
+            <!-- <p>In this video, we look at the application of the Box Method to create 3D objects in Blender.</p> -->
+         </div>
+         <div id="featurelist">
+            <div class="row">
+               <div class="col col-100"><br><p class="vid-intro">In this video, we look at the application of the Box Method to create 3D objects in Blender.</p>
+                  
+                  <iframe class="img-srcl" width="400px" height="195" src="https://www.youtube.com/embed/UJaC9VhtVBY?rel=0" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe></div><br>
+                  <p>Observe the given views and draw a 3D view that can be created based on these views using the box method.</p>
+                  <img src="images/LbD_chapter_3_Options.png" alt="chapter3Img1" width="100%" height="100%" />
+              <div class="section">  
+      
+         </div>
+         </div>
+         </div>
+            
+         <div id="browsericons">
+         </div>
+         <div class="footertext dintext">
+           <span class="pull-left"><p class="mrgnLft">Constructing 3D Objects: Extended</p></span>
+           <span class="pull-center"><p class="">Page 36</p></span>
+         </div>
+      </div>
+<!-- End Page 36 here -->
+<!-- Start Page 37 here -->
+<div class="page">
+      <a href="javascript:bookmarkThispage(37,'left');" id="bkActionId_37" bookmarked="0" ><img class="bookmark pull-left" src="images/bookmark-outline.png"></a>
+       
+         <div class="header">
+            <h2>Construction of 3D Object in Blender Using Quad View</h2>
+            
+         </div>
+         <div id="featurelist">
+            <div class="row">
+               <div class="col col-100"><br>
+                  <p class="vid-intro">Is there another approach to create a 3D object in Blender? Let’s look at how to make use of the Quad view.</p>
+                  <iframe class="img-srcl" width="400px" height="195" src="https://www.youtube.com/embed/EUQSMepQY3g?rel=0" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe></div><br>
+              <div class="section">  
+      
+         </div>
+         </div>
+         </div>
+            
+         <div id="browsericons">
+         </div>
+         <div class="footertext dintext">
+           <span class="pull-left"><p class="mrgnLft">Constructing 3D Objects: Extended </p></span>
+           <span class="pull-center"><p class="">Page 37</p></span>
+         </div>
+      </div>
+<!-- End Page 37 here -->
+<!-- Start Page 38 here -->
+<div class="page">
+      <a href="javascript:bookmarkThispage(38,'right');" id="bkActionId_38" bookmarked="0" ><img class="bookmark pull-right" src="images/bookmark-outline.png"></a>
+       
+         <div class="header">
+            <h2>Construction of 3D Object: Planning</h2>
+            
+         </div>
+         <div id="featurelist">
+            <div class="row">
+               <div class="col col-100"><p>Development of visualization skills requires more than simply learning a software. Let’s look at how to plant the construction of a 3D object on paper.
+            </p>
+                  <iframe class="img-srcl" width="400px" height="195" src="https://www.youtube.com/embed/fXFK3VbDQhQ?rel=0" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe></div><br>
+                  <p>Activity: Observe the given top and side view and draw the multiple possibilities of a 3D object</p>
+                  <img src="images/activity_2_image_1.png" alt="chapter3Img2" width="100%" height="190" />
+              <div class="section">  
+      
+         </div>
+         </div>
+         </div>
+            
+         <div id="browsericons">
+         </div>
+         <div class="footertext dintext">
+           <span class="pull-left"><p class="mrgnLft">Constructing 3D Objects: Extended</p></span>
+           <span class="pull-center"><p class="">Page 38</p></span>
+         </div>
+      </div>
+<!-- End Page 38 here -->
+<!-- Start Page 39 here -->
+<div class="page">
+      <a href="javascript:bookmarkThispage(39,'left');" id="bkActionId_39" bookmarked="0" ><img class="bookmark pull-left" src="images/bookmark-outline.png"></a>
+       
+         <div class="header">
+            <h2>Constructing a 3D Object in Blender</h2>
+            
+         </div>
+         <div id="featurelist">
+            <div class="row">
+               <div class="col col-100">
+               	<p class="vid-intro">Now it’s time to recreate the complex 3D object that you practised in the previous video, in Blender.</p>
+                  <iframe class="img-srcl" width="400px" height="195" src="https://www.youtube.com/embed/WINyZIjV5KA?rel=0" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe></div><br>
+              <div class="section">  
+      
+         </div>
+         </div>
+         </div>
+            
+         <div id="browsericons">
+         </div>
+         <div class="footertext dintext">
+           <span class="pull-left"><p class="mrgnLft">Constructing 3D Objects: Extended</p></span>
+           <span class="pull-center"><p class="">Page 39</p></span>
+         </div>
+      </div>
+      <!-- End Page 39 here -->
+<!-- Start Page 40 here -->
+<!-- End Chapter 3 Page here-->
+<!-- Start  Chapter 4 Page here-->
+<div class="page">
+<div class="page-intro">
+   <div id="featurelist page-intro">
+      <h6>Chapter 4</h6>
+    <h2>Mini Project</h2>
+    <p class="chapter-intro">This chapter will help you assimilate all that you learnt about 3D visualization in this e-book. There are 2 mini projects to be completed. Each project has 2 stages: 1. Planning and 2. Construction. Carefully follow all the instructions and explore the possibilities the world of 3D visualization has to offer you!</p>
+   </div>
+   <div id="browsericons">
+      <!--<img src="images/browser_icons+ie.png" alt="browser_icons+ie" width="386" height="45" />-->
+   </div>   
+   <div class="footertext dintext">
+   <span class="pull-left"><p class="">Mini Project</p></span>
+   <span class="pull-center"><p class="">Page 40</p></span>
+   </div>
+   </div>
+</div>
+<!-- End Page 40 here -->
+<!-- Start Page 41 here -->
+<div class="page">
+      <a href="javascript:bookmarkThispage(41,'left');" id="bkActionId_41" bookmarked="0" ><img class="bookmark pull-left" src="images/bookmark-outline.png"></a>
+         <div class="header">
+            <h2>Problem 1:  Observe the given Top view and Side view of the object, and perform the following stages: </h2>
+         </div>
+         <div id="featurelist">
+            <div class="row">
+               <div class="col col-100">
+                  <iframe class="img-srcl" width="0" height="0" src="https://www.youtube.com/embed/WINyZIjV5KA?rel=0" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe></div>
+                  <img src="images/activity_2_image_2.png" alt="activity_2_image_2" width="100%" height="100%" /><br>
+                  <p><b>Stage 1: Planning</b></p>
+                  <p>Draw the multiple possibilities of the Front View</p>
+                  <p>Draw the multiple possibilities of a 3D View</p>
+                  <br>  
+                  <p><b>Stage 2: Constructing & Visualizing in Blender</b></p>
+                  <p>Construct a 3D object in Blender of different possibilities which you have planned</p>
+                  <div class="section">  </div>
+         </div>
+         </div>
+            
+         <div id="browsericons">
+         </div>
+         <div class="footertext dintext">
+           <span class="pull-left"><p class="mrgnLft">Mini Project</p></span>
+           <span class="pull-center"><p class="">Page 41</p></span>
+         </div>
+      </div>
+<!-- End Page 41 here -->
+<!-- Start Page 42 here -->
+<div class="page">
+      <a href="javascript:bookmarkThispage(42,'right');" id="bkActionId_42" bookmarked="0" ><img class="bookmark pull-right" src="images/bookmark-outline.png"></a>
+         <div class="header">
+            <h2>Problem 2:  Observe the given Top view, Front view, and Side view of the object, and perform the following stages: </h2>
+         </div>
+         <div id="featurelist">
+            <div class="row">
+               <div class="col col-100">
+                  <iframe class="img-srcl" width="0" height="0" src="https://www.youtube.com/embed/WINyZIjV5KA?rel=0" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe></div>
+                  <img src="images/mini_projct_2.png" alt="mini_projct_2" width="100%" height="300" /><br>
+                  <p><b>Stage 1: Planning</b></p>
+                  <p>Draw the multiple possibilities of a 3D View.</p>
+                  <br>  
+                  <p><b>Stage 2: Visualizing in Blender</b></p>
+                  <p>Construct a 3D object in Blender of possibilities which you have planned.</p>
+                  <div class="section">  </div>
+         </div>
+         </div>
+            
+         <div id="browsericons">
+         </div>
+         <div class="footertext dintext">
+           <span class="pull-left"><p class="mrgnLft">Mini Project</p></span>
+           <span class="pull-center"><p class="">Page 42</p></span>
+         </div>
+      </div>
+
+
+ <!-- End Page 42 here -->
+<!-- Start Page 43 here -->
+<!-- End Chapter 4 Page here-->
+<!-- Start End of book page here -->
+<div class="page">
+<div class="page-intro">
+   <div id="featurelist page-intro">
+       <div id="chap_end"> <h2>End of Book</h2></div>
+   </div>
+   </div>
+   
+   
+</div>
+<a href="#modal">Modal №1</a>
+<div class="remodal" data-remodal-id="modal" role="dialog" aria-labelledby="modal1Title" aria-describedby="modal1Desc">
+  <button data-remodal-action="close" class="remodal-close" aria-label="Close"></button>
+  <div>
+    <h2 id="modal1Title">Disclaimer</h2>
+    <p id="modal1Desc">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas non interdum odio. Integer condimentum pretium est sed varius. 
+    </p>
+  </div>
+  <br>
+  <button data-remodal-action="cancel" class="remodal-cancel">Except</button>
+  <button data-remodal-action="confirm" class="remodal-confirm">Cancel</button>
+</div>
+
+<script type="text/javascript" src="js/remodal.js"></script>
+
+<!-- Events -->
+<script>
+  $(document).on('opening', '.remodal', function () {
+    console.log('opening');
+  });
+
+  $(document).on('opened', '.remodal', function () {
+    console.log('opened');
+  });
+
+  $(document).on('closing', '.remodal', function (e) {
+    console.log('closing' + (e.reason ? ', reason: ' + e.reason : ''));
+  });
+
+  $(document).on('closed', '.remodal', function (e) {
+    console.log('closed' + (e.reason ? ', reason: ' + e.reason : ''));
+  });
+
+  $(document).on('confirmation', '.remodal', function () {
+    console.log('confirmation');
+  });
+
+  $(document).on('cancellation', '.remodal', function () {
+    console.log('cancellation');
+  });
+
+
+ /*function changeColor(image) {
+    if (image.src.indexOf("images/bookmark-outline.png")>-1) {
+        image.src = "images/bookmark.png"; 
+    } else {
+        image.src = "images/bookmark-outline.png";
+    }
+ }*/
+ 
+
+</script>
+			<!-- end content setup - embedded for offline safety -->
+			
+			<!-- start controlbar - embedded for offline safety -->
+			<div class="controlbar">	<div class="text-style">
+		<div class="section-left">
+			<ul>
+	            <li id="My_Score_li">My score:<span id="score">0</span></li>
+                
+			</ul>
+		</div>
+		<span class="indexLink">
+			<a href="javascript:void(0);" onClick="gotoIndex();">Index</a>
+		</span>
+		</div><div id="pageflip-controls">
+	<div class="pf-left-buttons">
+		<div id="b-twitter" class="pf-control-bar-button" title="Share on Twitter"><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="26px" height="26px" viewBox="0 0 26 26" enable-background="new 0 0 26 26" xml:space="preserve">
+<g>
+<path d="M22.218,7.761c-0.641,0.284-1.331,0.477-2.055,0.563c0.739-0.442,1.306-1.144,1.573-1.979
+	c-0.691,0.41-1.457,0.708-2.272,0.868c-0.652-0.696-1.582-1.13-2.611-1.13c-1.976,0-3.578,1.602-3.578,3.578
+	c0,0.28,0.032,0.553,0.092,0.815c-2.973-0.149-5.608-1.573-7.374-3.738C5.688,7.267,5.511,7.881,5.511,8.537
+	c0,1.241,0.632,2.336,1.591,2.977c-0.586-0.019-1.138-0.179-1.62-0.447c0,0.015,0,0.03,0,0.045c0,1.733,1.233,3.179,2.87,3.508
+	c-0.3,0.082-0.616,0.125-0.942,0.125c-0.23,0-0.455-0.022-0.673-0.064c0.455,1.422,1.776,2.456,3.342,2.485
+	c-1.225,0.959-2.767,1.531-4.443,1.531c-0.289,0-0.574-0.017-0.854-0.049c1.583,1.015,3.463,1.606,5.483,1.606
+	c6.58,0,10.179-5.451,10.179-10.178c0-0.155-0.004-0.31-0.011-0.463C21.132,9.108,21.739,8.478,22.218,7.761z"/>
+</g>
+</svg></div>
+		<div id="b-google" class="pf-control-bar-button" title="Share on Google+"><svg version="1.2" baseProfile="tiny" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+	 x="0px" y="0px" width="26px" height="26px" viewBox="0 0 26 26" xml:space="preserve">
+<g>
+	<path d="M24.821,8.142v1.054h-2.789v2.79h-1.055v-2.79h-2.788V8.142h2.788V5.353h1.055v2.789H24.821z
+		 M16.998,16.343c0,1.632-1.517,3.284-4.415,3.284c-2.66,0-4.591-1.139-4.591-2.709c0-1.78,2.021-3.284,4.414-3.284
+		c0.121,0,0.237-0.001,0.351-0.003c-0.248-0.324-0.369-0.659-0.369-1.015c0-0.2,0.039-0.406,0.117-0.615c-0.039,0-0.079,0-0.119,0
+		c-2.006,0-3.462-1.392-3.462-3.31c0-1.747,1.873-3.338,3.93-3.338h4.861l-1.458,1.055h-0.785C16.05,6.904,16.4,7.746,16.4,8.719
+		c0,0.894-0.457,1.743-1.285,2.391c-0.696,0.544-0.759,0.722-0.759,1.092c0,0.252,0.569,0.85,1.059,1.195
+		C16.569,14.212,16.998,15.011,16.998,16.343z M12.818,14.393c-1.552,0-2.914,0.964-2.914,2.062c0,1.192,1.173,2.126,2.671,2.126
+		c1.963,0,2.958-0.694,2.958-2.062c0-0.131-0.017-0.267-0.049-0.404c-0.142-0.553-0.612-0.873-1.323-1.357l-0.306-0.209
+		c-0.317-0.1-0.652-0.152-0.995-0.156H12.818z M10.83,8.66c0.18,1.373,1.161,2.514,2.186,2.544c0.001,0,0.002,0,0.003,0
+		c0.417,0,0.754-0.157,1.014-0.454c0.396-0.451,0.565-1.152,0.464-1.924c-0.178-1.351-1.16-2.475-2.188-2.506l-0.042,0
+		c-0.385,0-0.726,0.157-0.987,0.455C10.894,7.214,10.73,7.901,10.83,8.66z"/>
+</g>
+</svg></div>
+		<div id="b-facebook" class="pf-control-bar-button" title="Share on Facebook"><svg version="1.2" baseProfile="tiny" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+	 x="0px" y="0px" width="26px" height="26px" viewBox="0 0 26 26" xml:space="preserve">
+<g>
+	<path d="M14.064,20.656h-3.379V12.49H8.997V9.675h1.688v-1.69c0-2.295,0.954-3.661,3.661-3.661h2.254v2.815h-1.408
+		c-1.055,0-1.125,0.394-1.125,1.127l-0.003,1.409h2.554l-0.3,2.814h-2.254V20.656z"/>
+</g>
+</svg></div>
+
+	</div>
+	<div class="pf-right-buttons">
+		<!--<div id="b-close" class="control-bar-button right" title="Close"><svg version="1.2" baseProfile="tiny" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+	 x="0px" y="0px" width="22px" height="26px" viewBox="0 0 22 26" xml:space="preserve">
+<g>
+	<polygon points="17.479,8.5 15.5,6.52 11,11.02 6.5,6.52 4.52,8.5 9.02,13 4.52,17.5 6.5,19.479 11,14.979 15.5,19.479 
+		17.479,17.5 12.979,13 	"/>
+</g>
+</svg></div>-->
+		<div id="b-fullscreen" class="pf-control-bar-button pf-right" title="Fullscreen On/Off"><svg version="1.2" baseProfile="tiny" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="22px" height="26px" viewBox="0 0 22 26" xml:space="preserve"><g><path d="M5.368,12.116v4.346h5.969v-4.346H5.368z M17,16c0,1.104-0.896,2-2,2H6c-1.104,0-2-0.896-2-2v-6c0-1.104,0.896-2,2-2h9 c1.104,0,2,0.896,2,2V16z"/></g></svg></div>
+		<div id="b-fullscreenoff" class="pf-control-bar-button pf-right"title="Fullscreen On/Off" style="display: none;"><svg version="1.2" baseProfile="tiny" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="22px" height="26px" viewBox="0 0 22 26" xml:space="preserve"><g><path d="M5.368,9.538v3.351h5.882v3.573h4.382V9.538H5.368z M17,16c0,1.104-0.896,2-2,2H6c-1.104,0-2-0.896-2-2v-6 c0-1.104,0.896-2,2-2h9c1.104,0,2,0.896,2,2V16z"/></g>
+</svg></div>
+		<div id="b-thumbs" class="pf-control-bar-button pf-right" title="Thumbnails"><svg version="1.2" baseProfile="tiny" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+	 x="0px" y="0px" width="22px" height="26px" viewBox="0 0 22 26" xml:space="preserve">
+<g>
+	<rect x="3" y="7" width="3.3" height="3.3"/>
+	<rect x="3" y="11" width="3.3" height="3.3"/>
+	<rect x="3" y="15" width="3.3" height="3.3"/>
+	<rect x="7" y="7" width="3.3" height="3.3"/>
+	<rect x="7" y="11" width="3.3" height="3.3"/>
+	<rect x="7" y="15" width="3.3" height="3.3"/>
+	<rect x="11" y="7" width="3.3" height="3.3"/>
+	<rect x="11" y="11" width="3.3" height="3.3"/>
+	<rect x="11" y="15" width="3.3" height="3.3"/>
+	<rect x="15" y="7" width="3.3" height="3.3"/>
+	<rect x="15" y="11" width="3.3" height="3.3"/>
+</g>
+</svg></div>
+		<!--<div id="b-index" class="control-bar-button right" title="Table of Contents"><svg version="1.2" baseProfile="tiny" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+	 x="0px" y="0px" width="22px" height="26px" viewBox="0 0 22 26" xml:space="preserve">
+<g>
+	<circle cx="4.5" cy="9" r="1.5"/>
+	<rect x="7" y="8" width="11" height="1.5"/>
+	<circle cx="4.5" cy="13" r="1.5"/>
+	<rect x="7" y="12" width="11" height="1.5"/>
+	<circle cx="4.5" cy="17" r="1.5"/>
+	<rect x="7" y="16" width="11" height="1.5"/>
+</g>
+</svg>
+</div>
+		<div id="b-download" class="control-bar-button right" title="Download printable .pdf version"><svg version="1.2" baseProfile="tiny" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+	 x="0px" y="0px" width="22px" height="26px" viewBox="0 0 22 26" xml:space="preserve">
+<g>
+	<path d="M2.75,17.889c0,0,4.35-2.535,7.25,0V9.016c-2.9-2.535-7.25,0-7.25,0V17.889z"/>
+	<path d="M18.25,17.889c0,0-4.352-2.535-7.25,0V9.016c2.898-2.535,7.25,0,7.25,0V17.889z"/>
+</g>
+</svg></div>
+		<div id="b-info" class="control-bar-button right" title="Info"><svg version="1.2" baseProfile="tiny" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+	 x="0px" y="0px" width="22px" height="26px" viewBox="0 0 22 26" xml:space="preserve">
+<g>
+	<circle cx="10.5" cy="8" r="1.5"/>
+	<polygon points="7,10.5 7,11.5 9,11.5 9,16.5 7,16.5 7,17.5 14,17.5 14,16.5 12,16.5 12,10.5 	"/>
+</g>
+</svg>
+</div>
+		<div id="b-sound" class="control-bar-button right" title="Sound On/Off" style="display: none;"><svg version="1.2" baseProfile="tiny" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+	 x="0px" y="0px" width="22px" height="26px" viewBox="0 0 22 26" xml:space="preserve">
+<g>
+	<g>
+		<polygon points="4,11 4,16 7,16 10,19 10,8 7,11 		"/>
+	</g>
+	<g>
+		<path d="M14.885,20.165l-0.813-0.517l0.259-0.407c1.116-1.757,1.707-3.742,1.707-5.741s-0.591-3.984-1.707-5.742l-0.259-0.407
+			l0.813-0.517l0.258,0.407C16.358,9.154,17,11.318,17,13.5c0,2.183-0.642,4.347-1.857,6.259L14.885,20.165z"/>
+	</g>
+	<g>
+		<path d="M13.285,19.107l-0.828-0.494l0.247-0.414c0.885-1.48,1.333-3.062,1.333-4.699s-0.448-3.219-1.333-4.699l-0.247-0.414
+			l0.828-0.494l0.247,0.414C14.506,9.938,15,11.686,15,13.5c0,1.814-0.494,3.562-1.468,5.193L13.285,19.107z"/>
+	</g>
+	<g>
+		<path d="M11.692,18.048l-0.846-0.462l0.231-0.423c0.637-1.166,0.96-2.398,0.96-3.663c0-1.264-0.323-2.497-0.96-3.663l-0.231-0.423
+			l0.846-0.462l0.231,0.423C12.638,10.685,13,12.072,13,13.5s-0.362,2.815-1.077,4.124L11.692,18.048z"/>
+	</g>
+</g>
+</svg></div>
+		<div id="b-soundoff" class="control-bar-button right"title="Sound On/Off" ><svg version="1.2" baseProfile="tiny" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+	 x="0px" y="0px" width="22px" height="26px" viewBox="0 0 22 26" xml:space="preserve">
+<g>
+	<polygon points="4,11 4,16 7,16 10,19 10,8 7,11 	"/>
+	<polygon points="17.047,11.039 16.252,10.244 14.126,12.37 12,10.244 11.205,11.039 13.331,13.165 11.205,15.291 12,16.086 
+		14.126,13.96 16.252,16.086 17.047,15.291 14.921,13.165 	"/>
+</g>
+</svg></div>-->
+		<div id="b-play" class="pf-control-bar-button pf-right" title="Auto Flipping"><svg version="1.2" baseProfile="tiny" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+	 x="0px" y="0px" width="22px" height="26px" viewBox="0 0 22 26" xml:space="preserve">
+<g>
+	<polygon points="5,8 17,13 5,18 	"/>
+</g>
+</svg>
+</div>
+		<div id="b-pause" class="pf-control-bar-button pf-right" title="Stop Auto Flipping" style="display: none;"><svg version="1.2" baseProfile="tiny" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+	 x="0px" y="0px" width="22px" height="26px" viewBox="0 0 22 26" xml:space="preserve">
+<g>
+	<path d="M10,16c0,1.104-0.896,2-2,2H7c-1.104,0-2-0.896-2-2v-6c0-1.104,0.896-2,2-2h1c1.104,0,2,0.896,2,2V16z"/>
+	<path d="M17,16c0,1.104-0.896,2-2,2h-1c-1.104,0-2-0.896-2-2v-6c0-1.104,0.896-2,2-2h1c1.104,0,2,0.896,2,2V16z"/>
+</g>
+</svg>
+</div>
+		<div id="b-zoomin" class="pf-control-bar-button pf-right" title="Zoom In"><svg version="1.2" baseProfile="tiny" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+	 x="0px" y="0px" width="26px" height="26px" viewBox="0 0 26 26" xml:space="preserve">
+<g>
+	<path d="M22.09,21.01l-4.643-4.641c0.609-0.98,0.967-2.133,0.967-3.369c0-3.537-2.877-6.414-6.414-6.414
+	c-3.535,0-6.414,2.877-6.414,6.414c0,3.535,2.879,6.414,6.414,6.414c1.288,0,2.485-0.385,3.491-1.041l4.618,4.617L22.09,21.01z
+	 M13,17h-2v-3H8v-2h3V9h2v3h3v2h-3V17z"/>
+</g>
+</svg></div>
+		<div id="b-zoomout" class="pf-control-bar-button pf-right" title="Zoom Out" style="display: none;"><svg version="1.2" baseProfile="tiny" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+	 x="0px" y="0px" width="26px" height="26px" viewBox="0 0 26 26" xml:space="preserve">
+<g>
+	<path d="M22.09,21.01l-4.643-4.641c0.609-0.98,0.967-2.133,0.967-3.369c0-3.537-2.877-6.414-6.414-6.414
+	c-3.535,0-6.414,2.877-6.414,6.414c0,3.535,2.879,6.414,6.414,6.414c1.288,0,2.485-0.385,3.491-1.041l4.618,4.617L22.09,21.01z
+	 M8,14v-2h8v2H8z"/>
+</g>
+</svg>
+</div>
+	</div>
+	<div class="pf-centered-buttons">
+		<div id="b-first" class="pf-control-bar-button pf-disabled"><svg version="1.2" baseProfile="tiny" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+	 x="0px" y="0px" width="26px" height="26px" viewBox="0 0 26 26" xml:space="preserve">
+<g>
+	<polygon points="9,13 17,21 19,19 13,13 19,7 17,5 	"/>
+	<rect x="6.2" y="6" width="2.8" height="14"/>
+</g>
+</svg></div>
+		<div id="b-prev" class="pf-control-bar-button pf-disabled"><svg version="1.2" baseProfile="tiny" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+	 x="0px" y="0px" width="26px" height="26px" viewBox="0 0 26 26" xml:space="preserve">
+<g>
+	<polygon points="7,13 17,23 19,21 11,13 19,5 17,3 	"/>
+</g>
+</svg></div>
+		<form id="pf-pfpager" class="pf-control-bar-pager">
+			<input type="text" name="pagerin" id="pf-pagerin">
+		</form>
+		<div id="b-next" class="pf-control-bar-button pf-disabled"><svg version="1.2" baseProfile="tiny" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+	 x="0px" y="0px" width="26px" height="26px" viewBox="0 0 26 26" xml:space="preserve">
+<g>
+	<polygon points="20,13 10,23 8,21 16,13 8,5 10,3 	"/>
+</g>
+</svg>
+</div>
+		<div id="b-last" class="pf-control-bar-button pf-disabled"><svg version="1.2" baseProfile="tiny" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+	 x="0px" y="0px" width="26px" height="26px" viewBox="0 0 26 26" xml:space="preserve">
+<g>
+	<polygon points="17,13 9,21 7,19 13,13 7,7 9,5 	"/>
+	<rect x="17" y="6" width="2.8" height="14"/>
+</g>
+</svg></div>
+	</div>
+	<div id="pf-copyright-text">&copy;2015 pageflip-books.com</div>
+	<div class="pageflip-credits">Powered by <a href="http://pageflip-books.com" target="_blank">Pageflip 5</a></div>
+</div></div>
+			<!-- end controlbar - embedded for offline safety -->
+			
+		</div>
+		<!-- end embed pageflip -->
+		
+		<!-- start script needed to run pageflip -->
+		<script type="text/javascript">
+
+			var $pageflip = $('#pageflip');
+			
+			/* Initialize & Start Pageflip 5 */
+			$pageflip.pageflipInit( {
+				/* Configuration options */
+				PageWidth: 450,
+				PageHeight: 600,
+				FullScreenEnabled: true,
+				Margin:10,
+				MarginBottom:54,
+				AutoScale: true,
+				AutoStageHeight: true,
+				StartPage: 1,
+				AutoFlipLoop: -1,
+				ControlbarToFront: true,
+				HashControl: true,
+				CenterSinglePage: true,
+				DropShadowOpacity: 0.3,
+				FlipTopShadowOpacity: 0.2,
+				HardFlipOpacity: 0.3,
+				EmbossOpacity: 0.2,
+				SecondaryDragArea: 32,
+				Transparency: true,				
+				Copyright: Key.Copyright,
+				Key: Key.Key
+				/* book ID - used as CSS class name */
+			}, "book" );
+			
+		</script>
+	<script>
+	var imgmodal = document.getElementById('imgmodal');
+	var modalImg = document.getElementById("imgmodalid");
+	function imgpopup(imgsrc){		
+		imgmodal.style.display = 'block';
+		modalImg.src = imgsrc;
+	}		
+	function imgclosemodal(){
+		imgmodal.style.display = 'none';
+	}
+	</script>
+	
+			
+		<!-- end script needed to run pageflip -->
+		<div class="pageflip-credits">Powered by <a href="http://pageflip-books.com" target="_blank">Pageflip 5</a></div>
+		
+	</body>
+</html>
